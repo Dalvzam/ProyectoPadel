@@ -28,6 +28,7 @@ public class Usuario extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         PanelFechaTurno = new javax.swing.JPanel();
+        jCalendar2 = new com.toedter.calendar.JCalendar();
         PanelManiana = new javax.swing.JPanel();
         Maniana = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
@@ -44,7 +45,6 @@ public class Usuario extends javax.swing.JFrame {
         Tur_Tar_3 = new javax.swing.JToggleButton();
         Tur_Tar_4 = new javax.swing.JToggleButton();
         Tur_Tar_5 = new javax.swing.JToggleButton();
-        jCalendar1 = new com.toedter.calendar.JCalendar();
         PanelPistas = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
@@ -54,7 +54,6 @@ public class Usuario extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1366, 768));
-        setPreferredSize(new java.awt.Dimension(1366, 768));
         setResizable(false);
 
         jPanel1.setMinimumSize(new java.awt.Dimension(1366, 768));
@@ -179,13 +178,13 @@ public class Usuario extends javax.swing.JFrame {
                 .addComponent(PanelManiana, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(PanelTarde, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jCalendar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jCalendar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         PanelFechaTurnoLayout.setVerticalGroup(
             PanelFechaTurnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelFechaTurnoLayout.createSequentialGroup()
-                .addContainerGap(193, Short.MAX_VALUE)
-                .addComponent(jCalendar1, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(189, Short.MAX_VALUE)
+                .addComponent(jCalendar2, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(PanelFechaTurnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(PanelTarde, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -350,7 +349,7 @@ public class Usuario extends javax.swing.JFrame {
     private javax.swing.JToggleButton Tur_Tar_3;
     private javax.swing.JToggleButton Tur_Tar_4;
     private javax.swing.JToggleButton Tur_Tar_5;
-    private com.toedter.calendar.JCalendar jCalendar1;
+    private com.toedter.calendar.JCalendar jCalendar2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
