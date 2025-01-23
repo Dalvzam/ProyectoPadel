@@ -6,7 +6,7 @@ package Login;
 
 /**
  *
- * @author Espectralevil
+ * @author Dalzam
  */
 public class Login extends javax.swing.JFrame {
 
@@ -35,9 +35,9 @@ public class Login extends javax.swing.JFrame {
         Registrarse = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1366, 768));
 
         bg.setBackground(new java.awt.Color(204, 204, 204));
+        bg.setMinimumSize(new java.awt.Dimension(1366, 768));
         bg.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         Login.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 48)); // NOI18N
