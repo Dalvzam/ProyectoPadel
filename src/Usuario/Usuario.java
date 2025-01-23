@@ -56,6 +56,7 @@ public class Usuario extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1366, 768));
         setResizable(false);
+        setLocationRelativeTo(null);
 
         jPanel1.setMinimumSize(new java.awt.Dimension(1366, 768));
         jPanel1.setPreferredSize(new java.awt.Dimension(1366, 768));
