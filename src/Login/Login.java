@@ -36,6 +36,7 @@ public class Login extends javax.swing.JFrame {
         Registrarse = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         bg.setBackground(new java.awt.Color(204, 204, 204));
         bg.setMinimumSize(new java.awt.Dimension(1366, 768));

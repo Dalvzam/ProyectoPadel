@@ -30,14 +30,6 @@ public class Usuario extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         PanelFechaTurno = new javax.swing.JPanel();
         jCalendar2 = new com.toedter.calendar.JCalendar();
-        PanelManiana = new javax.swing.JPanel();
-        Maniana = new javax.swing.JLabel();
-        jSeparator2 = new javax.swing.JSeparator();
-        Tur_Man_1 = new javax.swing.JToggleButton();
-        Tur_Man_2 = new javax.swing.JToggleButton();
-        Tur_Man_3 = new javax.swing.JToggleButton();
-        Tur_Man_4 = new javax.swing.JToggleButton();
-        Tur_Man_5 = new javax.swing.JToggleButton();
         PanelTarde = new javax.swing.JPanel();
         Tarde = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
@@ -63,60 +55,6 @@ public class Usuario extends javax.swing.JFrame {
 
         PanelFechaTurno.setBackground(new java.awt.Color(153, 153, 153));
 
-        Maniana.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 18)); // NOI18N
-        Maniana.setText("Mañana");
-
-        jSeparator2.setForeground(new java.awt.Color(0, 0, 0));
-
-        Tur_Man_1.setText("08:00 - 9:30");
-
-        Tur_Man_2.setText("08:00 - 9:30");
-
-        Tur_Man_3.setText("08:00 - 9:30");
-
-        Tur_Man_4.setText("08:00 - 9:30");
-
-        Tur_Man_5.setText("08:00 - 9:30");
-
-        javax.swing.GroupLayout PanelManianaLayout = new javax.swing.GroupLayout(PanelManiana);
-        PanelManiana.setLayout(PanelManianaLayout);
-        PanelManianaLayout.setHorizontalGroup(
-            PanelManianaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelManianaLayout.createSequentialGroup()
-                .addContainerGap(100, Short.MAX_VALUE)
-                .addComponent(Maniana)
-                .addGap(98, 98, 98))
-            .addGroup(PanelManianaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(PanelManianaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSeparator2)
-                    .addComponent(Tur_Man_1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Tur_Man_2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Tur_Man_3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Tur_Man_4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Tur_Man_5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        PanelManianaLayout.setVerticalGroup(
-            PanelManianaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PanelManianaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(Maniana)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Tur_Man_1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(Tur_Man_2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(Tur_Man_3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(Tur_Man_4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(Tur_Man_5)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
         Tarde.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 18)); // NOI18N
         Tarde.setText("Tarde");
 
@@ -137,10 +75,6 @@ public class Usuario extends javax.swing.JFrame {
         PanelTardeLayout.setHorizontalGroup(
             PanelTardeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelTardeLayout.createSequentialGroup()
-                .addGap(111, 111, 111)
-                .addComponent(Tarde)
-                .addContainerGap(114, Short.MAX_VALUE))
-            .addGroup(PanelTardeLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(PanelTardeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jSeparator1)
@@ -150,6 +84,10 @@ public class Usuario extends javax.swing.JFrame {
                     .addComponent(Tur_Tar_5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Tur_Tar_2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelTardeLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Tarde)
+                .addGap(244, 244, 244))
         );
         PanelTardeLayout.setVerticalGroup(
             PanelTardeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -175,11 +113,8 @@ public class Usuario extends javax.swing.JFrame {
         PanelFechaTurno.setLayout(PanelFechaTurnoLayout);
         PanelFechaTurnoLayout.setHorizontalGroup(
             PanelFechaTurnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PanelFechaTurnoLayout.createSequentialGroup()
-                .addComponent(PanelManiana, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(PanelTarde, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jCalendar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jCalendar2, javax.swing.GroupLayout.DEFAULT_SIZE, 540, Short.MAX_VALUE)
+            .addComponent(PanelTarde, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         PanelFechaTurnoLayout.setVerticalGroup(
             PanelFechaTurnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -187,9 +122,7 @@ public class Usuario extends javax.swing.JFrame {
                 .addContainerGap(189, Short.MAX_VALUE)
                 .addComponent(jCalendar2, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(PanelFechaTurnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(PanelTarde, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(PanelManiana, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addComponent(PanelTarde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jPanel1.add(PanelFechaTurno, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 540, 770));
@@ -334,17 +267,10 @@ public class Usuario extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel Maniana;
     private javax.swing.JPanel PanelFechaTurno;
-    private javax.swing.JPanel PanelManiana;
     private javax.swing.JPanel PanelPistas;
     private javax.swing.JPanel PanelTarde;
     private javax.swing.JLabel Tarde;
-    private javax.swing.JToggleButton Tur_Man_1;
-    private javax.swing.JToggleButton Tur_Man_2;
-    private javax.swing.JToggleButton Tur_Man_3;
-    private javax.swing.JToggleButton Tur_Man_4;
-    private javax.swing.JToggleButton Tur_Man_5;
     private javax.swing.JToggleButton Tur_Tar_1;
     private javax.swing.JToggleButton Tur_Tar_2;
     private javax.swing.JToggleButton Tur_Tar_3;
@@ -358,6 +284,5 @@ public class Usuario extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator2;
     // End of variables declaration//GEN-END:variables
 }

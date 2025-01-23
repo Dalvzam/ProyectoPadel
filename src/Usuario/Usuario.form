@@ -66,12 +66,8 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Component id="PanelManiana" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="PanelTarde" max="32767" attributes="0"/>
-                  </Group>
-                  <Component id="jCalendar2" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jCalendar2" alignment="0" pref="540" max="32767" attributes="0"/>
+                  <Component id="PanelTarde" alignment="1" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
@@ -80,10 +76,7 @@
                       <EmptySpace pref="189" max="32767" attributes="0"/>
                       <Component id="jCalendar2" min="-2" pref="336" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="PanelTarde" max="32767" attributes="0"/>
-                          <Component id="PanelManiana" max="32767" attributes="0"/>
-                      </Group>
+                      <Component id="PanelTarde" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -91,105 +84,11 @@
           <SubComponents>
             <Component class="com.toedter.calendar.JCalendar" name="jCalendar2">
             </Component>
-            <Container class="javax.swing.JPanel" name="PanelManiana">
-
-              <Layout>
-                <DimensionLayout dim="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace pref="100" max="32767" attributes="0"/>
-                          <Component id="Maniana" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="98" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jSeparator2" max="32767" attributes="0"/>
-                              <Component id="Tur_Man_1" max="32767" attributes="0"/>
-                              <Component id="Tur_Man_2" alignment="0" max="32767" attributes="0"/>
-                              <Component id="Tur_Man_3" alignment="0" max="32767" attributes="0"/>
-                              <Component id="Tur_Man_4" alignment="0" max="32767" attributes="0"/>
-                              <Component id="Tur_Man_5" alignment="0" max="32767" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                </DimensionLayout>
-                <DimensionLayout dim="1">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="Maniana" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jSeparator2" min="-2" pref="10" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="Tur_Man_1" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="Tur_Man_2" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="Tur_Man_3" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="Tur_Man_4" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="Tur_Man_5" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
-                      </Group>
-                  </Group>
-                </DimensionLayout>
-              </Layout>
-              <SubComponents>
-                <Component class="javax.swing.JLabel" name="Maniana">
-                  <Properties>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Yu Gothic UI Light" size="18" style="1"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="Ma&#xf1;ana"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JSeparator" name="jSeparator2">
-                  <Properties>
-                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="0" green="0" red="0" type="rgb"/>
-                    </Property>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JToggleButton" name="Tur_Man_1">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="08:00 - 9:30"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JToggleButton" name="Tur_Man_2">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="08:00 - 9:30"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JToggleButton" name="Tur_Man_3">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="08:00 - 9:30"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JToggleButton" name="Tur_Man_4">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="08:00 - 9:30"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JToggleButton" name="Tur_Man_5">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="08:00 - 9:30"/>
-                  </Properties>
-                </Component>
-              </SubComponents>
-            </Container>
             <Container class="javax.swing.JPanel" name="PanelTarde">
 
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="-2" pref="111" max="-2" attributes="0"/>
-                          <Component id="Tarde" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="114" max="32767" attributes="0"/>
-                      </Group>
                       <Group type="102" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -201,6 +100,11 @@
                               <Component id="Tur_Tar_2" alignment="0" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="Tarde" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="244" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
