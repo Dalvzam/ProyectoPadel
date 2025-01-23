@@ -6,7 +6,8 @@ package Usuario;
 
 /**
  *
- * @author Dalzam
+ * @author Dalvzam 
+ * @author jaimegonher2
  */
 public class Usuario extends javax.swing.JFrame {
 
