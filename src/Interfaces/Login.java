@@ -31,10 +31,18 @@ public class Login extends javax.swing.JFrame {
                 // Cerrar el frame actual
                 dispose();
                 
-                // Mostrar el otro frame
-                Usuario JFrameUsuario = new Usuario(); // Asegúrate de que OtroFrame esté en el mismo paquete
+                // Mostrar el otro frame del usuario registrado
+                Usuario JFrameUsuario = new Usuario(); 
                 JFrameUsuario.setVisible(true);
-            } else {
+            // En el caso de que el usuario y contraseña que se introduzca sea 2 y 2 mostrará el frame de administrador
+            } else if("2".equals(usuario) && "2".equals(contraseña)){
+                // Cerrar el frame actual
+                dispose();
+                
+                // Mostrar el otro frame del Administrador
+                // Usuario JFrameUsuario = new Usuario(); 
+                // JFrameUsuario.setVisible(true);
+            }else {
                 // Mostrar mensaje de error si no coincide
                 javax.swing.JOptionPane.showMessageDialog(null, 
                     "Usuario o contraseña incorrectos", 
@@ -69,7 +77,7 @@ public class Login extends javax.swing.JFrame {
         bg.setMinimumSize(new java.awt.Dimension(1366, 768));
         bg.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        Login.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 48)); // NOI18N
+        Login.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 48)); // NOI18N
         Login.setText("Login");
 
         Usuario.setForeground(new java.awt.Color(153, 153, 153));
@@ -78,6 +86,7 @@ public class Login extends javax.swing.JFrame {
         Contraseña.setForeground(new java.awt.Color(153, 153, 153));
         Contraseña.setText("Contraseña");
 
+        BotonLogin.setBackground(new java.awt.Color(255, 102, 0));
         BotonLogin.setText("Login");
 
         Registrarse.setText("Registrarse");
