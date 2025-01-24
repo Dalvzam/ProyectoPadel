@@ -5,6 +5,8 @@
 package Interfaces;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 /**
  *
  * @author Dalvzam
@@ -40,8 +42,8 @@ public class Login extends javax.swing.JFrame {
                 dispose();
                 
                 // Mostrar el otro frame del Administrador
-                // Usuario JFrameUsuario = new Usuario(); 
-                // JFrameUsuario.setVisible(true);
+                Admin JFrameAdmin = new Admin(); 
+                JFrameAdmin.setVisible(true);
             }else {
                 // Mostrar mensaje de error si no coincide
                 javax.swing.JOptionPane.showMessageDialog(null, 
@@ -49,6 +51,18 @@ public class Login extends javax.swing.JFrame {
                     "Error", 
                     javax.swing.JOptionPane.ERROR_MESSAGE);
             }
+        }
+    });
+    
+    Registrarse.addMouseListener(new MouseAdapter() {
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            // Cerrar el frame actual
+            dispose();
+
+            // Mostrar el otro frame de Registro
+            Registro JFrameRegistro = new Registro(); 
+            JFrameRegistro.setVisible(true);
         }
     });
 }
