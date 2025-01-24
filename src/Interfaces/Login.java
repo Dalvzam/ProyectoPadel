@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package Login;
-
+package Interfaces;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 /**
  *
  * @author Dalvzam
@@ -15,8 +16,34 @@ public class Login extends javax.swing.JFrame {
      * Creates new form Login
      */
     public Login() {
-        initComponents();
-    }
+    initComponents();
+    
+    // Configuración del ActionListener para el botón Login
+    BotonLogin.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            // Obtener el texto ingresado en los campos de Usuario y Contraseña
+            String usuario = Usuario.getText();
+            String contraseña = Contraseña.getText();
+            
+            // Comprobar si ambos campos tienen el valor "1"
+            if ("1".equals(usuario) && "1".equals(contraseña)) {
+                // Cerrar el frame actual
+                dispose();
+                
+                // Mostrar el otro frame
+                Usuario JFrameUsuario = new Usuario(); // Asegúrate de que OtroFrame esté en el mismo paquete
+                JFrameUsuario.setVisible(true);
+            } else {
+                // Mostrar mensaje de error si no coincide
+                javax.swing.JOptionPane.showMessageDialog(null, 
+                    "Usuario o contraseña incorrectos", 
+                    "Error", 
+                    javax.swing.JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    });
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
