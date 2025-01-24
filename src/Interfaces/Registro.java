@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package Registro;
+package Interfaces;
 
 /**
  *
@@ -40,7 +40,7 @@ public class Registro extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         bg.setBackground(new java.awt.Color(204, 204, 204));
-        bg.setFont(new java.awt.Font("Helvetica Neue", 1, 36)); // NOI18N
+        bg.setFont(bg.getFont().deriveFont(bg.getFont().getStyle() | java.awt.Font.BOLD, bg.getFont().getSize()+23));
         bg.setMinimumSize(new java.awt.Dimension(1366, 768));
         bg.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
