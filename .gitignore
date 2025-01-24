@@ -27,3 +27,6 @@ replay_pid*
 /.vscode
 =======
 >>>>>>> parent of acd6f25 (Arreglo Calendario)
+.idea/uiDesigner.xml
+.idea/workspace.xml
+/dist/
