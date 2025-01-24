@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package Login;
-
+package Interfaces;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 /**
  *
  * @author Dalvzam
@@ -15,8 +16,42 @@ public class Login extends javax.swing.JFrame {
      * Creates new form Login
      */
     public Login() {
-        initComponents();
-    }
+    initComponents();
+    
+    // Configuración del ActionListener para el botón Login
+    BotonLogin.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            // Obtener el texto ingresado en los campos de Usuario y Contraseña
+            String usuario = Usuario.getText();
+            String contraseña = Contraseña.getText();
+            
+            // Comprobar si ambos campos tienen el valor "1"
+            if ("1".equals(usuario) && "1".equals(contraseña)) {
+                // Cerrar el frame actual
+                dispose();
+                
+                // Mostrar el otro frame del usuario registrado
+                Usuario JFrameUsuario = new Usuario(); 
+                JFrameUsuario.setVisible(true);
+            // En el caso de que el usuario y contraseña que se introduzca sea 2 y 2 mostrará el frame de administrador
+            } else if("2".equals(usuario) && "2".equals(contraseña)){
+                // Cerrar el frame actual
+                dispose();
+                
+                // Mostrar el otro frame del Administrador
+                // Usuario JFrameUsuario = new Usuario(); 
+                // JFrameUsuario.setVisible(true);
+            }else {
+                // Mostrar mensaje de error si no coincide
+                javax.swing.JOptionPane.showMessageDialog(null, 
+                    "Usuario o contraseña incorrectos", 
+                    "Error", 
+                    javax.swing.JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    });
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -36,12 +71,13 @@ public class Login extends javax.swing.JFrame {
         Registrarse = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         bg.setBackground(new java.awt.Color(204, 204, 204));
         bg.setMinimumSize(new java.awt.Dimension(1366, 768));
         bg.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        Login.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 48)); // NOI18N
+        Login.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 48)); // NOI18N
         Login.setText("Login");
 
         Usuario.setForeground(new java.awt.Color(153, 153, 153));
@@ -50,6 +86,7 @@ public class Login extends javax.swing.JFrame {
         Contraseña.setForeground(new java.awt.Color(153, 153, 153));
         Contraseña.setText("Contraseña");
 
+        BotonLogin.setBackground(new java.awt.Color(255, 102, 0));
         BotonLogin.setText("Login");
 
         Registrarse.setText("Registrarse");
