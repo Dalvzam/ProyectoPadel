@@ -104,6 +104,9 @@
           </Layout>
           <SubComponents>
             <Component class="com.toedter.calendar.JCalendar" name="jCalendar2">
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jCalendar2MouseClicked"/>
+              </Events>
             </Component>
             <Container class="javax.swing.JPanel" name="PanelTarde">
 

@@ -23,7 +23,7 @@ public class Login extends javax.swing.JFrame {
     /**
      * Creates new form Login
      */
-    String ID;
+    public static String ID;
     public String ComprobarUsuario(File archivo,String usuario,String contrasenia){
         /* Esta funcion retornará tipo de usuario que se ha logeado:
          * - 0 si no es un usuario registrado

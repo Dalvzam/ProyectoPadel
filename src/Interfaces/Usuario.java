@@ -74,11 +74,7 @@ public class Usuario extends javax.swing.JFrame {
 
         Tur_Tar_3.setText("16:00 - 17:00");
         Tur_Tar_3.setActionCommand("");
-        Tur_Tar_3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Tur_Tar_3ActionPerformed(evt);
-            }
-        });
+        
 
         Tur_Tar_4.setText("18:00 - 19:00");
 
@@ -145,11 +141,7 @@ public class Usuario extends javax.swing.JFrame {
 
         jButton1.setBackground(new java.awt.Color(255, 102, 0));
         jButton1.setText("Cancelar Reserva");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
+        
 
         jButton2.setBackground(new java.awt.Color(255, 102, 0));
         jButton2.setText("Hacer Reserva\n");
@@ -318,16 +310,7 @@ public class Usuario extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
-    /*ELIMINAR*/
-    /*ELIMINAR*/
-    /*ELIMINAR*/
-    private void Tur_Tar_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Tur_Tar_3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Tur_Tar_3ActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    
 
     /**
      * @param args the command line arguments
