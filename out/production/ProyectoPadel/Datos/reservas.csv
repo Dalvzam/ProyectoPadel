@@ -1,2 +1,12 @@
-1,Mon Jan 27 19:22:34 CET 2025,3,azul
-2,4,verde
+27/01/2025,1,azul, jugador 1, jugador 2, jugador 3, jugador 4
+27/01/2025,2,azul, jugador 1, sin jugador, jugador 3, jugador 4
+27/01/2025,3,azul, sin jugador, sin jugador, sin jugador, sin jugador
+27/01/2025,1,morada, jugador 1, jugador 2, jugador 3, jugador 4
+27/01/2025,2,morada, jugador 1, sin jugador, jugador 3, jugador 4
+27/01/2025,3,morada, sin jugador, sin jugador, sin jugador, sin jugador
+27/01/2025,1,verde, jugador 1, jugador 2, jugador 3, jugador 4
+27/01/2025,2,verde, jugador 1, sin jugador, jugador 3, jugador 4
+27/01/2025,3,verde, sin jugador, sin jugador, sin jugador, sin jugador
+27/01/2025,1,roja, jugador 1, jugador 2, jugador 3, jugador 4
+27/01/2025,2,roja, jugador 1, sin jugador, jugador 3, jugador 4
+27/01/2025,3,roja, sin jugador, sin jugador, sin jugador, sin jugador
