@@ -7,6 +7,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 /**
  *
  * @author Dalvzam
@@ -17,6 +23,55 @@ public class Login extends javax.swing.JFrame {
     /**
      * Creates new form Login
      */
+    public static String ID;
+    public static String USER;
+    public String ComprobarUsuario(File archivo,String usuario,String contrasenia){
+        /* Esta funcion retornará tipo de usuario que se ha logeado:
+         * - 0 si no es un usuario registrado
+         * - 1 si es un usuario normal
+         * - 2 si es un usuario Administrador
+        */
+        FileReader fr = null;
+        BufferedReader br = null;
+        
+        String password;
+        String tipoUser;
+        try{
+            fr = new FileReader(archivo);
+            br = new BufferedReader(fr);
+            
+            String linea;
+            
+            while((linea = br.readLine()) != null){
+                String datosLeidos [] = linea.split(",");
+                if (datosLeidos.length == 4){
+                    ID = datosLeidos[0];
+                    USER = datosLeidos[1];
+                    password = datosLeidos[2];
+                    tipoUser = datosLeidos[3];
+                    if (USER.equals(usuario) && password.equals(contrasenia)){
+                        return tipoUser;
+                    }else{
+                        // Por si no ha encontrado en la ultima iteracion un usuario registrado no dejo ningun ID guardado
+                        ID = null;
+                    }
+                }
+            }   
+        }catch(Exception e){
+            e.printStackTrace();
+        }finally{
+            try {
+                if (fr != null){
+                    fr.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        return "0";
+    }
+    
     public Login() {
     initComponents();
     
@@ -28,16 +83,18 @@ public class Login extends javax.swing.JFrame {
             String usuario = Usuario.getText();
             String contraseña = Contraseña.getText();
             
-            // Comprobar si ambos campos tienen el valor "1"
-            if ("1".equals(usuario) && "1".equals(contraseña)) {
+            
+            File archivo = new File("src/Datos/usuarios.csv");
+            
+            if (ComprobarUsuario(archivo, usuario, contraseña).equals("1")) {
                 // Cerrar el frame actual
                 dispose();
                 
                 // Mostrar el otro frame del usuario registrado
                 Usuario JFrameUsuario = new Usuario(); 
                 JFrameUsuario.setVisible(true);
-            // En el caso de que el usuario y contraseña que se introduzca sea 2 y 2 mostrará el frame de administrador
-            } else if("2".equals(usuario) && "2".equals(contraseña)){
+            // En el caso de que el usuario y contraseña que se introduzca sea uno registrado como Administrador (tipo 2) mostrará el frame de administrador
+            } else if(ComprobarUsuario(archivo, usuario, contraseña).equals("2")){
                 // Cerrar el frame actual
                 dispose();
                 
@@ -196,7 +253,7 @@ public class Login extends javax.swing.JFrame {
             }
         });
     }
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BotonLogin;
     private javax.swing.JTextField Contraseña;
