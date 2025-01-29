@@ -24,6 +24,7 @@ public class Login extends javax.swing.JFrame {
      * Creates new form Login
      */
     public static String ID;
+    public static String USER;
     public String ComprobarUsuario(File archivo,String usuario,String contrasenia){
         /* Esta funcion retornará tipo de usuario que se ha logeado:
          * - 0 si no es un usuario registrado
@@ -32,7 +33,7 @@ public class Login extends javax.swing.JFrame {
         */
         FileReader fr = null;
         BufferedReader br = null;
-        String user;
+        
         String password;
         String tipoUser;
         try{
@@ -45,10 +46,10 @@ public class Login extends javax.swing.JFrame {
                 String datosLeidos [] = linea.split(",");
                 if (datosLeidos.length == 4){
                     ID = datosLeidos[0];
-                    user = datosLeidos[1];
+                    USER = datosLeidos[1];
                     password = datosLeidos[2];
                     tipoUser = datosLeidos[3];
-                    if (user.equals(usuario) && password.equals(contrasenia)){
+                    if (USER.equals(usuario) && password.equals(contrasenia)){
                         return tipoUser;
                     }else{
                         // Por si no ha encontrado en la ultima iteracion un usuario registrado no dejo ningun ID guardado

@@ -7,6 +7,8 @@ package Interfaces;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -47,34 +49,38 @@ public class Usuario extends javax.swing.JFrame {
         Turno_5 = new javax.swing.JToggleButton();
         PanelLogo = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        botonCancelarReserva = new javax.swing.JButton();
+        botonHacerReserva = new javax.swing.JButton();
         PanelPistas = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
+        Pista_Azul = new javax.swing.JLabel();
         jugador_Azul_1 = new javax.swing.JLabel();
         jugador_Azul_2 = new javax.swing.JLabel();
         jugador_Azul_3 = new javax.swing.JLabel();
         jugador_Azul_4 = new javax.swing.JLabel();
+        Seleccionado_Azul = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
+        Pista_Morada = new javax.swing.JLabel();
         jugador_Morada_1 = new javax.swing.JLabel();
         jugador_Morada_2 = new javax.swing.JLabel();
         jugador_Morada_3 = new javax.swing.JLabel();
         jugador_Morada_4 = new javax.swing.JLabel();
+        Seleccionado_Morado = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        Pista_Roja = new javax.swing.JLabel();
         jugador_Roja_1 = new javax.swing.JLabel();
         jugador_Roja_2 = new javax.swing.JLabel();
         jugador_Roja_3 = new javax.swing.JLabel();
         jugador_Roja_4 = new javax.swing.JLabel();
+        Seleccionado_Rojo = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
+        Pista_Verde = new javax.swing.JLabel();
         jugador_Verde_1 = new javax.swing.JLabel();
         jugador_Verde_2 = new javax.swing.JLabel();
         jugador_Verde_3 = new javax.swing.JLabel();
         jugador_Verde_4 = new javax.swing.JLabel();
+        Seleccionado_Verde = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1366, 820));
@@ -192,11 +198,21 @@ public class Usuario extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jButton1.setBackground(new java.awt.Color(255, 102, 0));
-        jButton1.setText("Cancelar Reserva");
+        botonCancelarReserva.setBackground(new java.awt.Color(255, 102, 0));
+        botonCancelarReserva.setText("Cancelar Reserva");
+        botonCancelarReserva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonCancelarReservaActionPerformed(evt);
+            }
+        });
 
-        jButton2.setBackground(new java.awt.Color(255, 102, 0));
-        jButton2.setText("Hacer Reserva\n");
+        botonHacerReserva.setBackground(new java.awt.Color(255, 102, 0));
+        botonHacerReserva.setText("Hacer Reserva\n");
+        botonHacerReserva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonHacerReservaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout PanelFechaTurnoLayout = new javax.swing.GroupLayout(PanelFechaTurno);
         PanelFechaTurno.setLayout(PanelFechaTurnoLayout);
@@ -208,8 +224,8 @@ public class Usuario extends javax.swing.JFrame {
                 .addComponent(PanelLogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(80, 80, 80)
                 .addGroup(PanelFechaTurnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(botonHacerReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botonCancelarReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         PanelFechaTurnoLayout.setVerticalGroup(
@@ -221,9 +237,9 @@ public class Usuario extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelFechaTurnoLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(botonHacerReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(botonCancelarReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(26, 26, 26)))
                 .addComponent(Calendario, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -236,7 +252,12 @@ public class Usuario extends javax.swing.JFrame {
 
         jPanel6.setBackground(new java.awt.Color(102, 102, 102));
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/pista_azul.png"))); // NOI18N
+        Pista_Azul.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/pista_azul.png"))); // NOI18N
+        Pista_Azul.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Pista_AzulMouseClicked(evt);
+            }
+        });
 
         jugador_Azul_1.setForeground(new java.awt.Color(255, 255, 255));
         jugador_Azul_1.setText("Sin Jugador");
@@ -250,24 +271,33 @@ public class Usuario extends javax.swing.JFrame {
         jugador_Azul_4.setForeground(new java.awt.Color(255, 255, 255));
         jugador_Azul_4.setText("Sin Jugador");
 
+        Seleccionado_Azul.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        Seleccionado_Azul.setForeground(new java.awt.Color(51, 255, 51));
+        Seleccionado_Azul.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Seleccionado_Azul.setText("Seleccionado");
+        Seleccionado_Azul.setVisible(false);
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addComponent(jLabel3)
+                .addComponent(Pista_Azul)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jugador_Azul_1, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
                     .addComponent(jugador_Azul_2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jugador_Azul_3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jugador_Azul_4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jugador_Azul_4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Seleccionado_Azul, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel3)
+            .addComponent(Pista_Azul)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(Seleccionado_Azul)
+                .addGap(18, 18, 18)
                 .addComponent(jugador_Azul_1)
                 .addGap(18, 18, 18)
                 .addComponent(jugador_Azul_2)
@@ -291,7 +321,12 @@ public class Usuario extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(102, 102, 102));
 
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/pista_morada.png"))); // NOI18N
+        Pista_Morada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/pista_morada.png"))); // NOI18N
+        Pista_Morada.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Pista_MoradaMouseClicked(evt);
+            }
+        });
 
         jugador_Morada_1.setForeground(new java.awt.Color(255, 255, 255));
         jugador_Morada_1.setText("Sin Jugador");
@@ -305,24 +340,33 @@ public class Usuario extends javax.swing.JFrame {
         jugador_Morada_4.setForeground(new java.awt.Color(255, 255, 255));
         jugador_Morada_4.setText("Sin Jugador");
 
+        Seleccionado_Morado.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        Seleccionado_Morado.setForeground(new java.awt.Color(51, 255, 51));
+        Seleccionado_Morado.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Seleccionado_Morado.setText("Seleccionado");
+        Seleccionado_Morado.setVisible(false);
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jLabel5)
+                .addComponent(Pista_Morada)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jugador_Morada_1, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
                     .addComponent(jugador_Morada_2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jugador_Morada_3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jugador_Morada_4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jugador_Morada_4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Seleccionado_Morado, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(Pista_Morada, javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addComponent(Seleccionado_Morado)
+                .addGap(18, 18, 18)
                 .addComponent(jugador_Morada_1)
                 .addGap(18, 18, 18)
                 .addComponent(jugador_Morada_2)
@@ -335,7 +379,12 @@ public class Usuario extends javax.swing.JFrame {
 
         jPanel4.setBackground(new java.awt.Color(102, 102, 102));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/pista_roja.png"))); // NOI18N
+        Pista_Roja.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/pista_roja.png"))); // NOI18N
+        Pista_Roja.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Pista_RojaMouseClicked(evt);
+            }
+        });
 
         jugador_Roja_1.setForeground(new java.awt.Color(255, 255, 255));
         jugador_Roja_1.setText("Sin Jugador");
@@ -349,27 +398,40 @@ public class Usuario extends javax.swing.JFrame {
         jugador_Roja_4.setForeground(new java.awt.Color(255, 255, 255));
         jugador_Roja_4.setText("Sin Jugador");
 
+        Seleccionado_Rojo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        Seleccionado_Rojo.setForeground(new java.awt.Color(51, 255, 51));
+        Seleccionado_Rojo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Seleccionado_Rojo.setText("Seleccionado");
+        Seleccionado_Rojo.setVisible(false);
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addComponent(jLabel2)
+                .addComponent(Pista_Roja)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jugador_Roja_1, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
-                    .addComponent(jugador_Roja_2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jugador_Roja_3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jugador_Roja_4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(13, 13, 13))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jugador_Roja_1, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
+                            .addComponent(jugador_Roja_2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jugador_Roja_3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jugador_Roja_4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(13, 13, 13))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(Seleccionado_Rojo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addComponent(jLabel2)
+                .addComponent(Pista_Roja)
                 .addGap(0, 26, Short.MAX_VALUE))
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(128, 128, 128)
+                .addGap(85, 85, 85)
+                .addComponent(Seleccionado_Rojo)
+                .addGap(18, 18, 18)
                 .addComponent(jugador_Roja_1)
                 .addGap(18, 18, 18)
                 .addComponent(jugador_Roja_2)
@@ -382,7 +444,12 @@ public class Usuario extends javax.swing.JFrame {
 
         jPanel5.setBackground(new java.awt.Color(102, 102, 102));
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/pista_verde.png"))); // NOI18N
+        Pista_Verde.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/pista_verde.png"))); // NOI18N
+        Pista_Verde.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Pista_VerdeMouseClicked(evt);
+            }
+        });
 
         jugador_Verde_1.setForeground(new java.awt.Color(255, 255, 255));
         jugador_Verde_1.setText("Sin Jugador");
@@ -396,27 +463,36 @@ public class Usuario extends javax.swing.JFrame {
         jugador_Verde_4.setForeground(new java.awt.Color(255, 255, 255));
         jugador_Verde_4.setText("Sin Jugador");
 
+        Seleccionado_Verde.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        Seleccionado_Verde.setForeground(new java.awt.Color(51, 255, 51));
+        Seleccionado_Verde.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Seleccionado_Verde.setText("Seleccionado");
+        Seleccionado_Verde.setVisible(false);
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addComponent(jLabel4)
+                .addComponent(Pista_Verde)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jugador_Verde_1, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
                     .addComponent(jugador_Verde_2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jugador_Verde_3, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
-                    .addComponent(jugador_Verde_4, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE))
+                    .addComponent(jugador_Verde_4, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
+                    .addComponent(Seleccionado_Verde, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addComponent(jLabel4)
+                .addComponent(Pista_Verde)
                 .addGap(0, 26, Short.MAX_VALUE))
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(125, 125, 125)
+                .addGap(82, 82, 82)
+                .addComponent(Seleccionado_Verde)
+                .addGap(18, 18, 18)
                 .addComponent(jugador_Verde_1)
                 .addGap(18, 18, 18)
                 .addComponent(jugador_Verde_2)
@@ -479,7 +555,9 @@ public class Usuario extends javax.swing.JFrame {
             DateFormat df = new SimpleDateFormat(pattern);
             Date fechaSinFormatear = Calendario.getDate();
             fechaFormateada = df.format(fechaSinFormatear);
-    
+            ResetearValoresJugadores();
+            ActualizarPistas(WhichTurnoSeleccionado());
+            
         
         }//GEN-LAST:event_CalendarioPropertyChange
     
@@ -522,6 +600,162 @@ public class Usuario extends javax.swing.JFrame {
             Turno_1.setSelected(false);
             ActualizarPistas("5");
         }//GEN-LAST:event_Turno_5ActionPerformed
+
+        private void botonHacerReservaActionPerformed(java.awt.event.ActionEvent evt) {
+            String contenido = fechaFormateada + "," + WhichTurnoSeleccionado() + "," + WhichPistaSeleccionada()+","+Login.USER+",sin jugador,sin jugador,sin jugador";
+            File archivo = new File("src/Datos/reservas.csv");
+            File tempFile = new File("src/Datos/temp_reservas.csv");
+            boolean actualizado = false;
+        
+            try (BufferedReader br = new BufferedReader(new FileReader(archivo));
+                 FileWriter escritor = new FileWriter(tempFile)) {
+        
+                String linea;
+                while ((linea = br.readLine()) != null) {
+                    String[] datosLeidos = linea.split(",");
+        
+                    if (!actualizado && datosLeidos.length == 7) {
+                        String fecha = datosLeidos[0];
+                        String turno = datosLeidos[1];
+                        String colorPista = datosLeidos[2];
+        
+                        if (fecha.equals(fechaFormateada) && turno.equals(WhichTurnoSeleccionado()) && colorPista.equals(WhichPistaSeleccionada())) {
+                            // Revisamos las columnas de jugadores (índices 3 a 6)
+                            for (int i = 3; i <= 6; i++) {
+                                if (datosLeidos[i].equalsIgnoreCase("sin jugador") || datosLeidos[i].equalsIgnoreCase(Login.USER)) {
+                                    datosLeidos[i] = Login.USER; // Reemplaza la primera coincidencia
+                                    actualizado = true;
+                                    break; // Sale del bucle
+                                }
+                            }
+                        }
+                    }
+                    
+                    escritor.write(String.join(",", datosLeidos) + System.lineSeparator());
+                }
+                // Si no se ha actualizado, agregar la nueva línea
+                if (!actualizado) {
+                    escritor.write(contenido + System.lineSeparator());
+                }
+                
+            } catch (IOException e) {
+                e.printStackTrace();
+                return;
+            }
+
+            
+            // Reemplaza el archivo original con el actualizado
+            if (archivo.delete() && tempFile.renameTo(archivo)) {
+                ActualizarPistas(WhichTurnoSeleccionado());
+            } 
+            
+            
+        }
+
+    private void Pista_AzulMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Pista_AzulMouseClicked
+        if (Seleccionado_Azul.isVisible()) {
+            Seleccionado_Azul.setVisible(false);
+            Seleccionado_Morado.setVisible(false);
+            Seleccionado_Rojo.setVisible(false);
+            Seleccionado_Verde.setVisible(false);
+        }else{
+            Seleccionado_Azul.setVisible(true);
+            Seleccionado_Morado.setVisible(false);
+            Seleccionado_Rojo.setVisible(false);
+            Seleccionado_Verde.setVisible(false);
+            PistaSeleccionada = "azul";
+        }
+    }//GEN-LAST:event_Pista_AzulMouseClicked
+
+    private void Pista_MoradaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Pista_MoradaMouseClicked
+        if (Seleccionado_Morado.isVisible()) {
+            Seleccionado_Azul.setVisible(false);
+            Seleccionado_Morado.setVisible(false);
+            Seleccionado_Rojo.setVisible(false);
+            Seleccionado_Verde.setVisible(false);
+        }else{
+            Seleccionado_Morado.setVisible(true);
+            Seleccionado_Azul.setVisible(false);
+            Seleccionado_Rojo.setVisible(false);
+            Seleccionado_Verde.setVisible(false);
+            PistaSeleccionada = "morada";
+        }
+    }//GEN-LAST:event_Pista_MoradaMouseClicked
+
+    private void Pista_RojaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Pista_RojaMouseClicked
+        if (Seleccionado_Rojo.isVisible()) {
+            Seleccionado_Azul.setVisible(false);
+            Seleccionado_Morado.setVisible(false);
+            Seleccionado_Rojo.setVisible(false);
+            Seleccionado_Verde.setVisible(false);
+        }else{
+            Seleccionado_Rojo.setVisible(true);
+            Seleccionado_Morado.setVisible(false);
+            Seleccionado_Azul.setVisible(false);
+            Seleccionado_Verde.setVisible(false);
+            PistaSeleccionada = "roja";
+        }
+    }//GEN-LAST:event_Pista_RojaMouseClicked
+
+    private void Pista_VerdeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Pista_VerdeMouseClicked
+        if (Seleccionado_Verde.isVisible()) {
+            Seleccionado_Azul.setVisible(false);
+            Seleccionado_Morado.setVisible(false);
+            Seleccionado_Rojo.setVisible(false);
+            Seleccionado_Verde.setVisible(false);
+        }else{
+            Seleccionado_Verde.setVisible(true);
+            Seleccionado_Morado.setVisible(false);
+            Seleccionado_Rojo.setVisible(false);
+            Seleccionado_Azul.setVisible(false);
+            PistaSeleccionada = "verde";
+        }
+    }//GEN-LAST:event_Pista_VerdeMouseClicked
+
+    private void botonCancelarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelarReservaActionPerformed
+        File archivo = new File("src/Datos/reservas.csv");
+            File tempFile = new File("src/Datos/temp_reservas.csv");
+            boolean actualizado = false;
+        
+            try (BufferedReader br = new BufferedReader(new FileReader(archivo));
+                 FileWriter escritor = new FileWriter(tempFile)) {
+        
+                String linea;
+                while ((linea = br.readLine()) != null) {
+                    String[] datosLeidos = linea.split(",");
+        
+                    if (!actualizado && datosLeidos.length == 7) {
+                        String fecha = datosLeidos[0];
+                        String turno = datosLeidos[1];
+                        String colorPista = datosLeidos[2];
+        
+                        if (fecha.equals(fechaFormateada) && turno.equals(WhichTurnoSeleccionado()) && colorPista.equals(WhichPistaSeleccionada())) {
+                            // Revisamos las columnas de jugadores (índices 3 a 6)
+                            for (int i = 3; i <= 6; i++) {
+                                if (datosLeidos[i].equalsIgnoreCase(Login.USER)) {
+                                    datosLeidos[i] = "sin jugador"; // Reemplaza la primera coincidencia
+                                    actualizado = true;
+                                    break; // Sale del bucle
+                                }
+                            }
+                        }
+                    }
+                    
+                    escritor.write(String.join(",", datosLeidos) + System.lineSeparator());
+                }
+                
+                
+            } catch (IOException e) {
+                e.printStackTrace();
+                return;
+            }
+
+            
+            // Reemplaza el archivo original con el actualizado
+            if (archivo.delete() && tempFile.renameTo(archivo)) {
+                ActualizarPistas(WhichTurnoSeleccionado());
+            } 
+    }//GEN-LAST:event_botonCancelarReservaActionPerformed
         
         public static void ActualizarPistas(String turnoSeleccionado){
             /* Cada vez que se seleccione un turno, las pistas se actualizarán y mostraran los jugadores */
@@ -540,7 +774,9 @@ public class Usuario extends javax.swing.JFrame {
                 String jugador2;
                 String jugador3;
                 String jugador4;
-    
+
+                ResetearValoresJugadores();
+
                 while((linea = br.readLine()) != null){
                     String datosLeidos [] = linea.split(",");
                     if (datosLeidos.length == 7){
@@ -597,6 +833,65 @@ public class Usuario extends javax.swing.JFrame {
         }
     }
 
+    public static void ResetearValoresJugadores(){
+        jugador_Azul_1.setText("Sin jugador");
+        jugador_Azul_2.setText("Sin jugador");
+        jugador_Azul_3.setText("Sin jugador");
+        jugador_Azul_4.setText("Sin jugador");
+
+        jugador_Morada_1.setText("Sin jugador");
+        jugador_Morada_2.setText("Sin jugador");
+        jugador_Morada_3.setText("Sin jugador");
+        jugador_Morada_4.setText("Sin jugador");
+
+        jugador_Roja_1.setText("Sin jugador");
+        jugador_Roja_2.setText("Sin jugador");
+        jugador_Roja_3.setText("Sin jugador");
+        jugador_Roja_4.setText("Sin jugador");
+
+        jugador_Verde_1.setText("Sin jugador");
+        jugador_Verde_2.setText("Sin jugador");
+        jugador_Verde_3.setText("Sin jugador");
+        jugador_Verde_4.setText("Sin jugador");
+    }
+
+    public static String WhichTurnoSeleccionado(){
+        if (Turno_1.isSelected()){
+            return "1";
+        }
+        if (Turno_2.isSelected()) {
+            return "2";
+        }
+        if (Turno_3.isSelected()) {
+            return "3";
+        }
+        if (Turno_4.isSelected()) {
+            return "4";
+        }
+        if (Turno_5.isSelected()) {
+            return "5";
+        }else{
+            return "0";
+        }
+    }
+
+    public static String WhichPistaSeleccionada(){
+        if (Seleccionado_Azul.isVisible()) {
+            return "azul";
+        }
+        if (Seleccionado_Morado.isVisible()) {
+            return "morada";
+        }
+        if (Seleccionado_Rojo.isVisible()) {
+            return "roja";
+        }
+        if (Seleccionado_Verde.isVisible()) {
+            return "verde";
+        }else{
+            return "0";
+        }
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -631,25 +926,29 @@ public class Usuario extends javax.swing.JFrame {
             }
         });
     }
-
+    public static String PistaSeleccionada;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JCalendar Calendario;
     private javax.swing.JPanel PanelFechaTurno;
     private javax.swing.JPanel PanelLogo;
     private javax.swing.JPanel PanelPistas;
     private javax.swing.JPanel PanelTurnos;
-    private javax.swing.JToggleButton Turno_1;
-    private javax.swing.JToggleButton Turno_2;
-    private javax.swing.JToggleButton Turno_3;
-    private javax.swing.JToggleButton Turno_4;
-    private javax.swing.JToggleButton Turno_5;
+    public static javax.swing.JLabel Pista_Azul;
+    public static javax.swing.JLabel Pista_Morada;
+    public static javax.swing.JLabel Pista_Roja;
+    public static javax.swing.JLabel Pista_Verde;
+    public static javax.swing.JLabel Seleccionado_Azul;
+    public static javax.swing.JLabel Seleccionado_Morado;
+    public static javax.swing.JLabel Seleccionado_Rojo;
+    public static javax.swing.JLabel Seleccionado_Verde;
+    public static javax.swing.JToggleButton Turno_1;
+    public static javax.swing.JToggleButton Turno_2;
+    public static javax.swing.JToggleButton Turno_3;
+    public static javax.swing.JToggleButton Turno_4;
+    public static javax.swing.JToggleButton Turno_5;
     private javax.swing.JPanel bg;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
+    private javax.swing.JButton botonCancelarReserva;
+    private javax.swing.JButton botonHacerReserva;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
