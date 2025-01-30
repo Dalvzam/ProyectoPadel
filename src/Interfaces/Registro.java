@@ -4,12 +4,37 @@
  */
 package Interfaces;
 
+import javax.swing.*;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+
 /**
  *
  * @author Dalvzam
  * @author jaimegonher2
  */
 public class Registro extends javax.swing.JFrame {
+
+    private void guardarUsuarioEnCSV() {
+        String nombre = Usuario.getText();
+        String apellido1 = Usuario1.getText();
+        String apellido2 = Usuario2.getText();
+        String email = Usuario3.getText();
+        String nivel = (String) jComboBox1.getSelectedItem();
+
+        String rutaArchivo = "src/Datos/usuarios.csv"; // Ruta del archivo CSV
+
+        try (FileWriter fw = new FileWriter(rutaArchivo, true);
+             PrintWriter pw = new PrintWriter(fw)) {
+
+            pw.println(nombre + "," + apellido1 + "," + apellido2 + "," + email + "," + nivel);
+            JOptionPane.showMessageDialog(this, "Usuario registrado exitosamente");
+
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Error al guardar los datos: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
 
     /**
      * Creates new form Login
@@ -27,15 +52,21 @@ public class Registro extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+
         bg = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         Registrar = new javax.swing.JLabel();
         Usuario = new javax.swing.JTextField();
         BotonRegistro = new javax.swing.JButton();
+        BotonRegistro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                guardarUsuarioEnCSV();
+            }
+        });
         jComboBox1 = new javax.swing.JComboBox<>();
         Usuario1 = new javax.swing.JTextField();
         Usuario2 = new javax.swing.JTextField();
-        Usuario3 = new javax.swing.JTextField();
+        Usuario3 = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -118,12 +149,12 @@ public class Registro extends javax.swing.JFrame {
         });
 
         Usuario2.setForeground(new java.awt.Color(153, 153, 153));
-        Usuario2.setText("Segundo apellido");
+        Usuario2.setText("E-mail");
 
         Usuario2.addFocusListener(new java.awt.event.FocusListener() {
             @Override
             public void focusGained(java.awt.event.FocusEvent evt) {
-                if (Usuario2.getText().equals("Segundo apellido")) {
+                if (Usuario2.getText().equals("E-mail")) {
                     Usuario2.setText("");
                     Usuario2.setForeground(new java.awt.Color(0, 0, 0)); // Cambiar a negro al escribir
                 }
@@ -132,29 +163,32 @@ public class Registro extends javax.swing.JFrame {
             @Override
             public void focusLost(java.awt.event.FocusEvent evt) {
                 if (Usuario2.getText().isEmpty()) {
-                    Usuario2.setText("Segundo apellido");
+                    Usuario2.setText("E-mail");
                     Usuario2.setForeground(new java.awt.Color(153, 153, 153)); // Volver al color gris si está vacío
                 }
             }
         });
 
+        Usuario3 = new javax.swing.JPasswordField();
         Usuario3.setForeground(new java.awt.Color(153, 153, 153));
-        Usuario3.setText("E-mail");
-        //Usuario3.setToolTipText("");
+        Usuario3.setText("Contraseña");
+        Usuario3.setEchoChar((char) 0); // Mostrar texto normal inicialmente
 
         Usuario3.addFocusListener(new java.awt.event.FocusListener() {
             @Override
             public void focusGained(java.awt.event.FocusEvent evt) {
-                if (Usuario3.getText().equals("E-mail")) {
+                if (String.valueOf(Usuario3.getPassword()).equals("Contraseña")) {
                     Usuario3.setText("");
-                    Usuario3.setForeground(new java.awt.Color(0, 0, 0)); // Cambiar a negro al escribir
+                    Usuario3.setEchoChar('●'); // Cambiar a asteriscos al escribir
+                    Usuario3.setForeground(new java.awt.Color(0, 0, 0)); // Cambiar a negro
                 }
             }
 
             @Override
             public void focusLost(java.awt.event.FocusEvent evt) {
-                if (Usuario3.getText().isEmpty()) {
-                    Usuario3.setText("E-mail");
+                if (String.valueOf(Usuario3.getPassword()).isEmpty()) {
+                    Usuario3.setEchoChar((char) 0); // Mostrar texto normal
+                    Usuario3.setText("Contraseña");
                     Usuario3.setForeground(new java.awt.Color(153, 153, 153)); // Volver al color gris si está vacío
                 }
             }
@@ -270,9 +304,10 @@ public class Registro extends javax.swing.JFrame {
     private javax.swing.JTextField Usuario;
     private javax.swing.JTextField Usuario1;
     private javax.swing.JTextField Usuario2;
-    private javax.swing.JTextField Usuario3;
+    private javax.swing.JPasswordField Usuario3;
     private javax.swing.JPanel bg;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
+
 }
