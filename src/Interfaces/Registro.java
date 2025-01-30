@@ -29,9 +29,9 @@ public class Registro extends javax.swing.JFrame {
 
         bg = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        Login = new javax.swing.JLabel();
+        Registrar = new javax.swing.JLabel();
         Usuario = new javax.swing.JTextField();
-        BotonLogin = new javax.swing.JButton();
+        BotonRegistro = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox<>();
         Usuario1 = new javax.swing.JTextField();
         Usuario2 = new javax.swing.JTextField();
@@ -44,8 +44,8 @@ public class Registro extends javax.swing.JFrame {
         bg.setMinimumSize(new java.awt.Dimension(1366, 768));
         bg.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        Login.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 48)); // NOI18N
-        Login.setText("Registro");
+        Registrar.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 48)); // NOI18N
+        Registrar.setText("Registro");
 
         Usuario.setForeground(new java.awt.Color(153, 153, 153));
         Usuario.setText("Nombre");
@@ -54,24 +54,111 @@ public class Registro extends javax.swing.JFrame {
                 UsuarioActionPerformed(evt);
             }
         });
+        Usuario.setText("Nombre");
+        Usuario.setForeground(new java.awt.Color(153, 153, 153)); // Color gris para simular placeholder
 
-        BotonLogin.setBackground(new java.awt.Color(255, 102, 0));
-        BotonLogin.setForeground(new java.awt.Color(255, 255, 255));
-        BotonLogin.setText("Login");
-        BotonLogin.setToolTipText("");
-        BotonLogin.setPreferredSize(new java.awt.Dimension(100, 32));
+        Usuario.addFocusListener(new java.awt.event.FocusListener() {
+            @Override
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                if (Usuario.getText().equals("Nombre")) {
+                    Usuario.setText("");
+                    Usuario.setForeground(new java.awt.Color(0, 0, 0)); // Cambiar a negro al escribir
+                }
+            }
+
+            @Override
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                if (Usuario.getText().isEmpty()) {
+                    Usuario.setText("Nombre");
+                    Usuario.setForeground(new java.awt.Color(153, 153, 153)); // Volver al color gris si está vacío
+                }
+            }
+        });
+
+
+        BotonRegistro.setBackground(new java.awt.Color(255, 102, 0));
+        BotonRegistro.setForeground(new java.awt.Color(255, 255, 255));
+        BotonRegistro.setText("Registrar");
+        BotonRegistro.setToolTipText("");
+        BotonRegistro.setPreferredSize(new java.awt.Dimension(100, 32));
+        BotonRegistro.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 30)); // Ajusta la fuente y tamaño
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "NIVEL", "Principiante", "Intermedio", "Avanzado" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"NIVEL", "Principiante", "Intermedio", "Avanzado"}));
+        jComboBox1.setSelectedIndex(0); // Se asegura de que "NIVEL" aparezca primero
+
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                if (jComboBox1.getSelectedIndex() == 0) {
+                    jComboBox1.setSelectedIndex(-1); // Evita que "NIVEL" sea seleccionable
+                }
+            }
+        });
+
 
         Usuario1.setForeground(new java.awt.Color(153, 153, 153));
         Usuario1.setText("Primer apellido");
+        Usuario1.addFocusListener(new java.awt.event.FocusListener() {
+            @Override
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                if (Usuario1.getText().equals("Primer apellido")) {
+                    Usuario1.setText("");
+                    Usuario1.setForeground(new java.awt.Color(0, 0, 0)); // Cambiar a negro al escribir
+                }
+            }
+
+            @Override
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                if (Usuario1.getText().isEmpty()) {
+                    Usuario1.setText("Primer apellido");
+                    Usuario1.setForeground(new java.awt.Color(153, 153, 153)); // Volver al color gris si está vacío
+                }
+            }
+        });
 
         Usuario2.setForeground(new java.awt.Color(153, 153, 153));
         Usuario2.setText("Segundo apellido");
 
+        Usuario2.addFocusListener(new java.awt.event.FocusListener() {
+            @Override
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                if (Usuario2.getText().equals("Segundo apellido")) {
+                    Usuario2.setText("");
+                    Usuario2.setForeground(new java.awt.Color(0, 0, 0)); // Cambiar a negro al escribir
+                }
+            }
+
+            @Override
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                if (Usuario2.getText().isEmpty()) {
+                    Usuario2.setText("Segundo apellido");
+                    Usuario2.setForeground(new java.awt.Color(153, 153, 153)); // Volver al color gris si está vacío
+                }
+            }
+        });
+
         Usuario3.setForeground(new java.awt.Color(153, 153, 153));
         Usuario3.setText("E-mail");
-        Usuario3.setToolTipText("");
+        //Usuario3.setToolTipText("");
+
+        Usuario3.addFocusListener(new java.awt.event.FocusListener() {
+            @Override
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                if (Usuario3.getText().equals("E-mail")) {
+                    Usuario3.setText("");
+                    Usuario3.setForeground(new java.awt.Color(0, 0, 0)); // Cambiar a negro al escribir
+                }
+            }
+
+            @Override
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                if (Usuario3.getText().isEmpty()) {
+                    Usuario3.setText("E-mail");
+                    Usuario3.setForeground(new java.awt.Color(153, 153, 153)); // Volver al color gris si está vacío
+                }
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -81,14 +168,14 @@ public class Registro extends javax.swing.JFrame {
                 .addContainerGap(74, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(Login)
+                        .addComponent(Registrar)
                         .addGap(122, 122, 122))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(Usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(BotonLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(BotonRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(Usuario1, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(Usuario2, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(Usuario3, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -98,7 +185,7 @@ public class Registro extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addComponent(Login, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Registrar, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -110,7 +197,7 @@ public class Registro extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(49, 49, 49)
-                .addComponent(BotonLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(BotonRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(78, 78, 78))
         );
 
@@ -134,7 +221,7 @@ public class Registro extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void UsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UsuarioActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_UsuarioActionPerformed
 
 
@@ -178,8 +265,8 @@ public class Registro extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BotonLogin;
-    private javax.swing.JLabel Login;
+    private javax.swing.JButton BotonRegistro;
+    private javax.swing.JLabel Registrar;
     private javax.swing.JTextField Usuario;
     private javax.swing.JTextField Usuario1;
     private javax.swing.JTextField Usuario2;

@@ -85,6 +85,7 @@ public class Usuario extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1366, 820));
         setResizable(false);
+        setLocationRelativeTo(null);
 
         bg.setMinimumSize(new java.awt.Dimension(1366, 820));
         bg.setPreferredSize(new java.awt.Dimension(1366, 820));

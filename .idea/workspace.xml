@@ -5,9 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="17198eef-e16a-4f3c-8e34-7aed14722448" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/build/classes/Registro/Registro.form" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/Registro/Registro.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Registro/Registro.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/Registro/Registro.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Registro/Registro.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Registro/Registro.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nbproject/private/private.properties" beforeDir="false" afterPath="$PROJECT_DIR$/nbproject/private/private.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Interfaces/Admin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Interfaces/Admin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Interfaces/Registro.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Interfaces/Registro.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Interfaces/Usuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Interfaces/Usuario.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,12 +41,14 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.Admin.executor": "Run",
     "Application.Login.executor": "Run",
+    "Application.Registro.executor": "Run",
     "Application.Usuario.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "Jaime",
+    "git-widget-placeholder": "InterfazAdmin",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/Users/jaime/Library/CloudStorage/OneDrive-Educacyl/DAM/2º DAM/DDI/Proyecto/ProyectoPadel",
     "node.js.detected.package.eslint": "true",
@@ -62,8 +66,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-125ca727e0f0-intellij.indexing.shared.core-IU-243.23654.117" />
-        <option value="bundled-js-predefined-d6986cc7102b-822845ee3bb5-JavaScript-IU-243.23654.117" />
+        <option value="bundled-jdk-9823dce3aa75-125ca727e0f0-intellij.indexing.shared.core-IU-243.23654.189" />
+        <option value="bundled-js-predefined-d6986cc7102b-822845ee3bb5-JavaScript-IU-243.23654.189" />
       </set>
     </attachedChunks>
   </component>
@@ -77,6 +81,10 @@
       <updated>1737649129725</updated>
       <workItem from="1737649131012" duration="2016000" />
       <workItem from="1737651837525" duration="1366000" />
+      <workItem from="1738231436686" duration="561000" />
+      <workItem from="1738232014113" duration="869000" />
+      <workItem from="1738248960033" duration="1074000" />
+      <workItem from="1738253420888" duration="2583000" />
     </task>
     <servers />
   </component>
