@@ -17,10 +17,10 @@ import java.io.PrintWriter;
 public class Registro extends javax.swing.JFrame {
 
     private void guardarUsuarioEnCSV() {
-        String nombre = Usuario.getText();
-        String apellido1 = Usuario1.getText();
-        String apellido2 = Usuario2.getText();
-        String email = Usuario3.getText();
+        String Usuario = this.Usuario.getText();
+        String PrimerApellido = this.PrimerApellido.getText();
+        String Email = this.Email.getText();
+        String Contrasena = this.Contrasena.getText();
         String nivel = (String) jComboBox1.getSelectedItem();
 
         String rutaArchivo = "src/Datos/usuarios.csv"; // Ruta del archivo CSV
@@ -28,7 +28,7 @@ public class Registro extends javax.swing.JFrame {
         try (FileWriter fw = new FileWriter(rutaArchivo, true);
              PrintWriter pw = new PrintWriter(fw)) {
 
-            pw.println(nombre + "," + apellido1 + "," + apellido2 + "," + email + "," + nivel);
+            pw.println(Usuario + "," + Contrasena + "," + "1");
             JOptionPane.showMessageDialog(this, "Usuario registrado exitosamente");
 
         } catch (IOException e) {
@@ -64,9 +64,9 @@ public class Registro extends javax.swing.JFrame {
             }
         });
         jComboBox1 = new javax.swing.JComboBox<>();
-        Usuario1 = new javax.swing.JTextField();
-        Usuario2 = new javax.swing.JTextField();
-        Usuario3 = new javax.swing.JPasswordField();
+        PrimerApellido = new javax.swing.JTextField();
+        Email = new javax.swing.JTextField();
+        Contrasena = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -128,68 +128,68 @@ public class Registro extends javax.swing.JFrame {
         });
 
 
-        Usuario1.setForeground(new java.awt.Color(153, 153, 153));
-        Usuario1.setText("Primer apellido");
-        Usuario1.addFocusListener(new java.awt.event.FocusListener() {
+        PrimerApellido.setForeground(new java.awt.Color(153, 153, 153));
+        PrimerApellido.setText("Primer apellido");
+        PrimerApellido.addFocusListener(new java.awt.event.FocusListener() {
             @Override
             public void focusGained(java.awt.event.FocusEvent evt) {
-                if (Usuario1.getText().equals("Primer apellido")) {
-                    Usuario1.setText("");
-                    Usuario1.setForeground(new java.awt.Color(0, 0, 0)); // Cambiar a negro al escribir
+                if (PrimerApellido.getText().equals("Primer apellido")) {
+                    PrimerApellido.setText("");
+                    PrimerApellido.setForeground(new java.awt.Color(0, 0, 0)); // Cambiar a negro al escribir
                 }
             }
 
             @Override
             public void focusLost(java.awt.event.FocusEvent evt) {
-                if (Usuario1.getText().isEmpty()) {
-                    Usuario1.setText("Primer apellido");
-                    Usuario1.setForeground(new java.awt.Color(153, 153, 153)); // Volver al color gris si está vacío
+                if (PrimerApellido.getText().isEmpty()) {
+                    PrimerApellido.setText("Primer apellido");
+                    PrimerApellido.setForeground(new java.awt.Color(153, 153, 153)); // Volver al color gris si está vacío
                 }
             }
         });
 
-        Usuario2.setForeground(new java.awt.Color(153, 153, 153));
-        Usuario2.setText("E-mail");
+        Email.setForeground(new java.awt.Color(153, 153, 153));
+        Email.setText("E-mail");
 
-        Usuario2.addFocusListener(new java.awt.event.FocusListener() {
+        Email.addFocusListener(new java.awt.event.FocusListener() {
             @Override
             public void focusGained(java.awt.event.FocusEvent evt) {
-                if (Usuario2.getText().equals("E-mail")) {
-                    Usuario2.setText("");
-                    Usuario2.setForeground(new java.awt.Color(0, 0, 0)); // Cambiar a negro al escribir
+                if (Email.getText().equals("E-mail")) {
+                    Email.setText("");
+                    Email.setForeground(new java.awt.Color(0, 0, 0)); // Cambiar a negro al escribir
                 }
             }
 
             @Override
             public void focusLost(java.awt.event.FocusEvent evt) {
-                if (Usuario2.getText().isEmpty()) {
-                    Usuario2.setText("E-mail");
-                    Usuario2.setForeground(new java.awt.Color(153, 153, 153)); // Volver al color gris si está vacío
+                if (Email.getText().isEmpty()) {
+                    Email.setText("E-mail");
+                    Email.setForeground(new java.awt.Color(153, 153, 153)); // Volver al color gris si está vacío
                 }
             }
         });
 
-        Usuario3 = new javax.swing.JPasswordField();
-        Usuario3.setForeground(new java.awt.Color(153, 153, 153));
-        Usuario3.setText("Contraseña");
-        Usuario3.setEchoChar((char) 0); // Mostrar texto normal inicialmente
+        Contrasena = new javax.swing.JPasswordField();
+        Contrasena.setForeground(new java.awt.Color(153, 153, 153));
+        Contrasena.setText("Contraseña");
+        Contrasena.setEchoChar((char) 0); // Mostrar texto normal inicialmente
 
-        Usuario3.addFocusListener(new java.awt.event.FocusListener() {
+        Contrasena.addFocusListener(new java.awt.event.FocusListener() {
             @Override
             public void focusGained(java.awt.event.FocusEvent evt) {
-                if (String.valueOf(Usuario3.getPassword()).equals("Contraseña")) {
-                    Usuario3.setText("");
-                    Usuario3.setEchoChar('●'); // Cambiar a asteriscos al escribir
-                    Usuario3.setForeground(new java.awt.Color(0, 0, 0)); // Cambiar a negro
+                if (String.valueOf(Contrasena.getPassword()).equals("Contraseña")) {
+                    Contrasena.setText("");
+                    Contrasena.setEchoChar('●'); // Cambiar a asteriscos al escribir
+                    Contrasena.setForeground(new java.awt.Color(0, 0, 0)); // Cambiar a negro
                 }
             }
 
             @Override
             public void focusLost(java.awt.event.FocusEvent evt) {
-                if (String.valueOf(Usuario3.getPassword()).isEmpty()) {
-                    Usuario3.setEchoChar((char) 0); // Mostrar texto normal
-                    Usuario3.setText("Contraseña");
-                    Usuario3.setForeground(new java.awt.Color(153, 153, 153)); // Volver al color gris si está vacío
+                if (String.valueOf(Contrasena.getPassword()).isEmpty()) {
+                    Contrasena.setEchoChar((char) 0); // Mostrar texto normal
+                    Contrasena.setText("Contraseña");
+                    Contrasena.setForeground(new java.awt.Color(153, 153, 153)); // Volver al color gris si está vacío
                 }
             }
         });
@@ -210,9 +210,9 @@ public class Registro extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(BotonRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(Usuario1, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Usuario2, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Usuario3, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(PrimerApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Email, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Contrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(69, 69, 69))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -223,11 +223,11 @@ public class Registro extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(Usuario1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(PrimerApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(Usuario2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Email, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-                .addComponent(Usuario3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Contrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(49, 49, 49)
@@ -302,9 +302,9 @@ public class Registro extends javax.swing.JFrame {
     private javax.swing.JButton BotonRegistro;
     private javax.swing.JLabel Registrar;
     private javax.swing.JTextField Usuario;
-    private javax.swing.JTextField Usuario1;
-    private javax.swing.JTextField Usuario2;
-    private javax.swing.JPasswordField Usuario3;
+    private javax.swing.JTextField PrimerApellido;
+    private javax.swing.JTextField Email;
+    private javax.swing.JPasswordField Contrasena;
     private javax.swing.JPanel bg;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JPanel jPanel1;
