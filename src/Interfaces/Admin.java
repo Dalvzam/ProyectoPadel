@@ -5,7 +5,6 @@
 package Interfaces;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -14,9 +13,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -35,10 +32,10 @@ private static final String RUTA_CSV = "src/Datos/reservas.csv";
 
 
         // Acción para el botón "Bloquear"
-        bloquear.addActionListener(e -> actualizarEstadoPista(1));
+        bloquear.addActionListener(e -> bloquearPista(1));
 
         // Acción para el botón "Desbloquear"
-        desbloquear.addActionListener(e -> actualizarEstadoPista(0));
+        desbloquear.addActionListener(e -> desBloquearPista(0));
         
     }
     
@@ -61,45 +58,97 @@ private static final String RUTA_CSV = "src/Datos/reservas.csv";
         seleccionarUsuario.setModel(new DefaultComboBoxModel<>(usuarios.toArray(new String[0])));
     }
 
-    private void actualizarEstadoPista(int nuevoEstado) {
-        String pistaSeleccionada = (String) seleccionarPista.getSelectedItem();
+    private void bloquearPista(int nuevoEstado) {
+            File archivo = new File("src/Datos/reservas.csv");
+            File tempFile = new File("src/Datos/temp_reservas.csv");
+            boolean actualizado = false;
+            boolean pistaBloqueada = false;
 
-        if (pistaSeleccionada == null || pistaSeleccionada.equals("PISTA")) {
-            JOptionPane.showMessageDialog(this, "Por favor, selecciona una pista.", "Error", JOptionPane.ERROR_MESSAGE);
+            try (BufferedReader br = new BufferedReader(new FileReader(archivo));
+                 FileWriter escritor = new FileWriter(tempFile)) {
+
+                String linea;
+                while ((linea = br.readLine()) != null) {
+                    String[] datosLeidos = linea.split(",");
+
+                    if (!actualizado && datosLeidos.length == 8) { // Asegura que tiene 8 columnas
+                        String fecha = datosLeidos[0];
+                        String turno = datosLeidos[1];
+                        String colorPista = datosLeidos[2];
+                        String bloqueoPista = datosLeidos[7];
+
+                        if (fecha.equals(fechaFormateada) && turno.equals(WhichTurnoSeleccionado())
+                                && colorPista.equals(WhichPistaSeleccionada())) {
+                            // Cambiamos el dato para bloquear la pista
+                            datosLeidos[7] = "1";
+                        }
+                    }
+
+                    escritor.write(String.join(",", datosLeidos) + System.lineSeparator());
+                }
+
+
+                    javax.swing.JOptionPane.showMessageDialog(null,
+                            "El estado de la pista ha cambiado correctamente.",
+                            "Éxito",
+                            javax.swing.JOptionPane.ERROR_MESSAGE);
+
+
+            } catch (IOException e) {
+                e.printStackTrace();
+                return;
+            }
+
+            // Reemplaza el archivo original con el actualizado
+            if (archivo.delete() && tempFile.renameTo(archivo)) {
+                ActualizarPistas(WhichTurnoSeleccionado());
+            }
+        }
+
+    private void desBloquearPista(int nuevoEstado) {
+        File archivo = new File("src/Datos/reservas.csv");
+        File tempFile = new File("src/Datos/temp_reservas.csv");
+        boolean actualizado = false;
+        boolean pistaBloqueada = false;
+
+        try (BufferedReader br = new BufferedReader(new FileReader(archivo));
+             FileWriter escritor = new FileWriter(tempFile)) {
+
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                String[] datosLeidos = linea.split(",");
+
+                if (!actualizado && datosLeidos.length == 8) { // Asegura que tiene 8 columnas
+                    String fecha = datosLeidos[0];
+                    String turno = datosLeidos[1];
+                    String colorPista = datosLeidos[2];
+                    String bloqueoPista = datosLeidos[7];
+
+                    if (fecha.equals(fechaFormateada) && turno.equals(WhichTurnoSeleccionado())
+                            && colorPista.equals(WhichPistaSeleccionada())) {
+                        // Cambiamos el dato para bloquear la pista
+                        datosLeidos[7] = "0";
+                    }
+                }
+
+                escritor.write(String.join(",", datosLeidos) + System.lineSeparator());
+            }
+
+
+            javax.swing.JOptionPane.showMessageDialog(null,
+                    "El estado de la pista ha cambiado correctamente.",
+                    "Éxito",
+                    javax.swing.JOptionPane.ERROR_MESSAGE);
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
             return;
         }
 
-        try {
-            // Leer el archivo CSV
-            List<String> lineas = new ArrayList<>();
-            try (BufferedReader br = new BufferedReader(new FileReader(RUTA_CSV))) {
-                String linea;
-                while ((linea = br.readLine()) != null) {
-                    lineas.add(linea);
-                }
-            }
-
-            // Actualizar el estado de la pista seleccionada
-            for (int i = 0; i < lineas.size(); i++) {
-                String[] datos = lineas.get(i).split(",");
-                if (datos[0].equals(pistaSeleccionada)) {
-                    datos[1] = String.valueOf(nuevoEstado);
-                    lineas.set(i, String.join(",", datos));
-                    break;
-                }
-            }
-
-            // Escribir los cambios en el archivo CSV
-            try (BufferedWriter bw = new BufferedWriter(new FileWriter(RUTA_CSV))) {
-                for (String linea : lineas) {
-                    bw.write(linea);
-                    bw.newLine();
-                }
-            }
-
-            JOptionPane.showMessageDialog(this, "Estado de la pista actualizado correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(this, "Error al actualizar el estado de la pista: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        // Reemplaza el archivo original con el actualizado
+        if (archivo.delete() && tempFile.renameTo(archivo)) {
+            ActualizarPistas(WhichTurnoSeleccionado());
         }
     }
 
@@ -140,6 +189,7 @@ private static final String RUTA_CSV = "src/Datos/reservas.csv";
         jugador_Azul_3 = new javax.swing.JLabel();
         jugador_Azul_4 = new javax.swing.JLabel();
         Seleccionado_Azul = new javax.swing.JLabel();
+        bloqueado_azul = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         Pista_Morada = new javax.swing.JLabel();
         jugador_Morada_1 = new javax.swing.JLabel();
@@ -147,6 +197,7 @@ private static final String RUTA_CSV = "src/Datos/reservas.csv";
         jugador_Morada_3 = new javax.swing.JLabel();
         jugador_Morada_4 = new javax.swing.JLabel();
         Seleccionado_Morado = new javax.swing.JLabel();
+        bloqueado_morado = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         Pista_Roja = new javax.swing.JLabel();
         jugador_Roja_1 = new javax.swing.JLabel();
@@ -154,6 +205,7 @@ private static final String RUTA_CSV = "src/Datos/reservas.csv";
         jugador_Roja_3 = new javax.swing.JLabel();
         jugador_Roja_4 = new javax.swing.JLabel();
         Seleccionado_Rojo = new javax.swing.JLabel();
+        bloqueado_rojo = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         Pista_Verde = new javax.swing.JLabel();
         jugador_Verde_1 = new javax.swing.JLabel();
@@ -161,6 +213,7 @@ private static final String RUTA_CSV = "src/Datos/reservas.csv";
         jugador_Verde_3 = new javax.swing.JLabel();
         jugador_Verde_4 = new javax.swing.JLabel();
         Seleccionado_Verde = new javax.swing.JLabel();
+        bloqueado_verde = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1366, 820));
@@ -183,8 +236,6 @@ private static final String RUTA_CSV = "src/Datos/reservas.csv";
         textoTurnos.setText("Turnos");
 
         jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
-
-
 
         Turno_1.setText("16:00 - 17:00");
         Turno_1.setActionCommand("");
@@ -386,6 +437,11 @@ private static final String RUTA_CSV = "src/Datos/reservas.csv";
         Seleccionado_Azul.setText("Seleccionado");
         Seleccionado_Azul.setVisible(false);
 
+        bloqueado_azul.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        bloqueado_azul.setForeground(new java.awt.Color(255, 0, 0));
+        bloqueado_azul.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        bloqueado_azul.setText("BLOQUEADO");
+        bloqueado_azul.setVisible(false);
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -395,17 +451,25 @@ private static final String RUTA_CSV = "src/Datos/reservas.csv";
                 .addComponent(Pista_Azul)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jugador_Azul_1, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
+                    .addComponent(jugador_Azul_1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jugador_Azul_2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jugador_Azul_3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jugador_Azul_4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Seleccionado_Azul, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Seleccionado_Azul, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(bloqueado_azul, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Pista_Azul)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addComponent(Pista_Azul)
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(bloqueado_azul)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(Seleccionado_Azul)
                 .addGap(18, 18, 18)
                 .addComponent(jugador_Azul_1)
@@ -415,7 +479,7 @@ private static final String RUTA_CSV = "src/Datos/reservas.csv";
                 .addComponent(jugador_Azul_3)
                 .addGap(18, 18, 18)
                 .addComponent(jugador_Azul_4)
-                .addGap(125, 125, 125))
+                .addGap(127, 127, 127))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -456,6 +520,12 @@ private static final String RUTA_CSV = "src/Datos/reservas.csv";
         Seleccionado_Morado.setText("Seleccionado");
         Seleccionado_Morado.setVisible(false);
 
+        bloqueado_morado.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        bloqueado_morado.setForeground(new java.awt.Color(255, 0, 0));
+        bloqueado_morado.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        bloqueado_morado.setText("BLOQUEADO");
+        bloqueado_morado.setVisible(false);
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -468,13 +538,19 @@ private static final String RUTA_CSV = "src/Datos/reservas.csv";
                     .addComponent(jugador_Morada_2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jugador_Morada_3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jugador_Morada_4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Seleccionado_Morado, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(Seleccionado_Morado, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(bloqueado_morado, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Pista_Morada, javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(Pista_Morada))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(bloqueado_morado)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(Seleccionado_Morado)
                 .addGap(18, 18, 18)
                 .addComponent(jugador_Morada_1)
@@ -514,6 +590,12 @@ private static final String RUTA_CSV = "src/Datos/reservas.csv";
         Seleccionado_Rojo.setText("Seleccionado");
         Seleccionado_Rojo.setVisible(false);
 
+        bloqueado_rojo.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        bloqueado_rojo.setForeground(new java.awt.Color(255, 0, 0));
+        bloqueado_rojo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        bloqueado_rojo.setText("BLOQUEADO");
+        bloqueado_rojo.setVisible(false);
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -524,14 +606,17 @@ private static final String RUTA_CSV = "src/Datos/reservas.csv";
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jugador_Roja_1, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
+                            .addComponent(jugador_Roja_1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jugador_Roja_2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jugador_Roja_3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jugador_Roja_4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(13, 13, 13))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(Seleccionado_Rojo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())))
+                        .addContainerGap())
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(bloqueado_rojo)
+                        .addContainerGap(16, Short.MAX_VALUE))))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -539,7 +624,9 @@ private static final String RUTA_CSV = "src/Datos/reservas.csv";
                 .addComponent(Pista_Roja)
                 .addGap(0, 26, Short.MAX_VALUE))
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(85, 85, 85)
+                .addContainerGap()
+                .addComponent(bloqueado_rojo)
+                .addGap(56, 56, 56)
                 .addComponent(Seleccionado_Rojo)
                 .addGap(18, 18, 18)
                 .addComponent(jugador_Roja_1)
@@ -579,6 +666,12 @@ private static final String RUTA_CSV = "src/Datos/reservas.csv";
         Seleccionado_Verde.setText("Seleccionado");
         Seleccionado_Verde.setVisible(false);
 
+        bloqueado_verde.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        bloqueado_verde.setForeground(new java.awt.Color(255, 0, 0));
+        bloqueado_verde.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        bloqueado_verde.setText("BLOQUEADO");
+        bloqueado_verde.setVisible(false);
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -591,7 +684,10 @@ private static final String RUTA_CSV = "src/Datos/reservas.csv";
                     .addComponent(jugador_Verde_2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jugador_Verde_3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jugador_Verde_4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Seleccionado_Verde, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(Seleccionado_Verde, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(bloqueado_verde)))
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
@@ -600,7 +696,9 @@ private static final String RUTA_CSV = "src/Datos/reservas.csv";
                 .addComponent(Pista_Verde)
                 .addGap(0, 26, Short.MAX_VALUE))
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(82, 82, 82)
+                .addContainerGap()
+                .addComponent(bloqueado_verde)
+                .addGap(53, 53, 53)
                 .addComponent(Seleccionado_Verde)
                 .addGap(18, 18, 18)
                 .addComponent(jugador_Verde_1)
@@ -880,7 +978,7 @@ private static final String RUTA_CSV = "src/Datos/reservas.csv";
         if (archivo.delete() && tempFile.renameTo(archivo)) {
             ActualizarPistas(WhichTurnoSeleccionado());
         }
-    }//GEN-LAST:event_botonCancelarReservaActionPerformed
+    }                                                    
 
     private void desbloquearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_desbloquearActionPerformed
         // TODO add your handling code here:
@@ -902,7 +1000,10 @@ private static final String RUTA_CSV = "src/Datos/reservas.csv";
         try{
             fr = new FileReader(archivo);
             br = new BufferedReader(fr);
-
+            bloqueado_azul.setVisible(false);
+            bloqueado_morado.setVisible(false);
+            bloqueado_rojo.setVisible(false);
+            bloqueado_verde.setVisible(false);
             String linea;
             String fecha;
             String turno;
@@ -911,6 +1012,7 @@ private static final String RUTA_CSV = "src/Datos/reservas.csv";
             String jugador2;
             String jugador3;
             String jugador4;
+            String pistabloqueada;
 
             ResetearValoresJugadores();
 
@@ -924,6 +1026,7 @@ private static final String RUTA_CSV = "src/Datos/reservas.csv";
                     jugador2 = datosLeidos[4];
                     jugador3 = datosLeidos[5];
                     jugador4 = datosLeidos[6];
+                    pistabloqueada = datosLeidos[7];
                     if (fecha.equals(fechaFormateada) && turno.equals(turnoSeleccionado)){
                         switch (colorPista) {
                             case "azul":
@@ -931,24 +1034,36 @@ private static final String RUTA_CSV = "src/Datos/reservas.csv";
                                 jugador_Azul_2.setText(jugador2);
                                 jugador_Azul_3.setText(jugador3);
                                 jugador_Azul_4.setText(jugador4);
+                                if(pistabloqueada.equals("1")){
+                                    bloqueado_azul.setVisible(true);
+                                }
                                 break;
                             case "morada":
                                 jugador_Morada_1.setText(jugador1);
                                 jugador_Morada_2.setText(jugador2);
                                 jugador_Morada_3.setText(jugador3);
                                 jugador_Morada_4.setText(jugador4);
+                                if(pistabloqueada.equals("1")){
+                                    bloqueado_morado.setVisible(true);
+                                }
                                 break;
                             case "roja":
                                 jugador_Roja_1.setText(jugador1);
                                 jugador_Roja_2.setText(jugador2);
                                 jugador_Roja_3.setText(jugador3);
                                 jugador_Roja_4.setText(jugador4);
+                                if(pistabloqueada.equals("1")){
+                                    bloqueado_rojo.setVisible(true);
+                                }
                                 break;
                             case "verde":
                                 jugador_Verde_1.setText(jugador1);
                                 jugador_Verde_2.setText(jugador2);
                                 jugador_Verde_3.setText(jugador3);
                                 jugador_Verde_4.setText(jugador4);
+                                if(pistabloqueada.equals("1")){
+                                    bloqueado_verde.setVisible(true);
+                                }
                                 break;
 
                             default:
@@ -1085,6 +1200,10 @@ private static final String RUTA_CSV = "src/Datos/reservas.csv";
     public static javax.swing.JToggleButton Turno_4;
     public static javax.swing.JToggleButton Turno_5;
     private javax.swing.JPanel bg;
+    public static javax.swing.JLabel bloqueado_azul;
+    public static javax.swing.JLabel bloqueado_morado;
+    public static javax.swing.JLabel bloqueado_rojo;
+    public static javax.swing.JLabel bloqueado_verde;
     private javax.swing.JButton bloquear;
     private javax.swing.JButton botonCancelarReserva;
     private javax.swing.JButton desbloquear;
