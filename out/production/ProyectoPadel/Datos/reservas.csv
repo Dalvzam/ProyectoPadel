@@ -1,14 +1,11 @@
-27/01/2025,1,azul,jugador 1,jugador 2,jugador 3,jugador 4,0
-27/01/2025,2,azul,jugador 1,USER,jugador 3,jugador 4,0
+27/01/2025,1,azul,sin jugador,diego,jugador 3,jugador 4,1
+27/01/2025,2,azul,diego,USER,jugador 3,jugador 4,0
 27/01/2025,3,azul,sin jugador,sin jugador,sin jugador,sin jugador,0
-27/01/2025,1,morada,jugador 1,jugador 2,jugador 3,jugador 4,0
-27/01/2025,2,morada,jugador 1,sin jugador,jugador 3,jugador 4,0
+27/01/2025,1,morada,sin jugador,jugador 2,jugador 3,jugador 4,0
+27/01/2025,2,morada,diego,sin jugador,jugador 3,jugador 4,0
 27/01/2025,3,morada,sin jugador,sin jugador,sin jugador,sin jugador,0
-27/01/2025,1,verde,jugador 1,jugador 2,jugador 3,jugador 4,0
-27/01/2025,2,verde,jugador 1,jaime,jugador 3,jugador 4,0
+27/01/2025,1,verde,jaime,jugador 2,jugador 3,jugador 4,0
+27/01/2025,2,verde,diego,sin jugador,jugador 3,jugador 4,0
 27/01/2025,3,verde,sin jugador,sin jugador,sin jugador,sin jugador,0
-27/01/2025,1,roja,jugador 1,jugador 2,jugador 3,jugador 4,0
-27/01/2025,2,roja,jugador 1,USER,jugador 3,jugador 4,0
-27/01/2025,3,roja,sin jugador,sin jugador,sin jugador,sin jugador,0
-29/01/2025,1,azul,sin jugador,sin jugador,sin jugador,sin jugador,0
-29/01/2025,1,roja,sin jugador,sin jugador,sin jugador,sin jugador,0
+27/01/2025,1,roja,jaime,jugador 2,jugador 3,jugador 4,0
+27/01/2025,2,roja,diego,USER,jugador 3,jugador 4,0

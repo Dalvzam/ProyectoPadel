@@ -4,12 +4,37 @@
  */
 package Interfaces;
 
+import javax.swing.*;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+
 /**
  *
  * @author Dalvzam
  * @author jaimegonher2
  */
 public class Registro extends javax.swing.JFrame {
+
+    private void guardarUsuarioEnCSV() {
+        String Usuario = this.Usuario.getText();
+        String PrimerApellido = this.PrimerApellido.getText();
+        String Email = this.Email.getText();
+        String Contrasena = this.Contrasena.getText();
+        String nivel = (String) jComboBox1.getSelectedItem();
+
+        String rutaArchivo = "src/Datos/usuarios.csv"; // Ruta del archivo CSV
+
+        try (FileWriter fw = new FileWriter(rutaArchivo, true);
+             PrintWriter pw = new PrintWriter(fw)) {
+
+            pw.println(Usuario + "," + Contrasena + "," + "1");
+            JOptionPane.showMessageDialog(this, "Usuario registrado exitosamente");
+
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Error al guardar los datos: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
 
     /**
      * Creates new form Login
@@ -27,15 +52,21 @@ public class Registro extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+
         bg = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        Login = new javax.swing.JLabel();
+        Registrar = new javax.swing.JLabel();
         Usuario = new javax.swing.JTextField();
-        BotonLogin = new javax.swing.JButton();
+        BotonRegistro = new javax.swing.JButton();
+        BotonRegistro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                guardarUsuarioEnCSV();
+            }
+        });
         jComboBox1 = new javax.swing.JComboBox<>();
-        Usuario1 = new javax.swing.JTextField();
-        Usuario2 = new javax.swing.JTextField();
-        Usuario3 = new javax.swing.JTextField();
+        PrimerApellido = new javax.swing.JTextField();
+        Email = new javax.swing.JTextField();
+        Contrasena = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -44,8 +75,8 @@ public class Registro extends javax.swing.JFrame {
         bg.setMinimumSize(new java.awt.Dimension(1366, 768));
         bg.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        Login.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 48)); // NOI18N
-        Login.setText("Registro");
+        Registrar.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 48)); // NOI18N
+        Registrar.setText("Registro");
 
         Usuario.setForeground(new java.awt.Color(153, 153, 153));
         Usuario.setText("Nombre");
@@ -54,24 +85,114 @@ public class Registro extends javax.swing.JFrame {
                 UsuarioActionPerformed(evt);
             }
         });
+        Usuario.setText("Nombre");
+        Usuario.setForeground(new java.awt.Color(153, 153, 153)); // Color gris para simular placeholder
 
-        BotonLogin.setBackground(new java.awt.Color(255, 102, 0));
-        BotonLogin.setForeground(new java.awt.Color(255, 255, 255));
-        BotonLogin.setText("Login");
-        BotonLogin.setToolTipText("");
-        BotonLogin.setPreferredSize(new java.awt.Dimension(100, 32));
+        Usuario.addFocusListener(new java.awt.event.FocusListener() {
+            @Override
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                if (Usuario.getText().equals("Nombre")) {
+                    Usuario.setText("");
+                    Usuario.setForeground(new java.awt.Color(0, 0, 0)); // Cambiar a negro al escribir
+                }
+            }
+
+            @Override
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                if (Usuario.getText().isEmpty()) {
+                    Usuario.setText("Nombre");
+                    Usuario.setForeground(new java.awt.Color(153, 153, 153)); // Volver al color gris si está vacío
+                }
+            }
+        });
+
+
+        BotonRegistro.setBackground(new java.awt.Color(255, 102, 0));
+        BotonRegistro.setForeground(new java.awt.Color(255, 255, 255));
+        BotonRegistro.setText("Registrar");
+        BotonRegistro.setToolTipText("");
+        BotonRegistro.setPreferredSize(new java.awt.Dimension(100, 32));
+        BotonRegistro.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 30)); // Ajusta la fuente y tamaño
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "NIVEL", "Principiante", "Intermedio", "Avanzado" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"NIVEL", "Principiante", "Intermedio", "Avanzado"}));
+        jComboBox1.setSelectedIndex(0); // Se asegura de que "NIVEL" aparezca primero
 
-        Usuario1.setForeground(new java.awt.Color(153, 153, 153));
-        Usuario1.setText("Primer apellido");
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                if (jComboBox1.getSelectedIndex() == 0) {
+                    jComboBox1.setSelectedIndex(-1); // Evita que "NIVEL" sea seleccionable
+                }
+            }
+        });
 
-        Usuario2.setForeground(new java.awt.Color(153, 153, 153));
-        Usuario2.setText("Segundo apellido");
 
-        Usuario3.setForeground(new java.awt.Color(153, 153, 153));
-        Usuario3.setText("E-mail");
-        Usuario3.setToolTipText("");
+        PrimerApellido.setForeground(new java.awt.Color(153, 153, 153));
+        PrimerApellido.setText("Primer apellido");
+        PrimerApellido.addFocusListener(new java.awt.event.FocusListener() {
+            @Override
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                if (PrimerApellido.getText().equals("Primer apellido")) {
+                    PrimerApellido.setText("");
+                    PrimerApellido.setForeground(new java.awt.Color(0, 0, 0)); // Cambiar a negro al escribir
+                }
+            }
+
+            @Override
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                if (PrimerApellido.getText().isEmpty()) {
+                    PrimerApellido.setText("Primer apellido");
+                    PrimerApellido.setForeground(new java.awt.Color(153, 153, 153)); // Volver al color gris si está vacío
+                }
+            }
+        });
+
+        Email.setForeground(new java.awt.Color(153, 153, 153));
+        Email.setText("E-mail");
+
+        Email.addFocusListener(new java.awt.event.FocusListener() {
+            @Override
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                if (Email.getText().equals("E-mail")) {
+                    Email.setText("");
+                    Email.setForeground(new java.awt.Color(0, 0, 0)); // Cambiar a negro al escribir
+                }
+            }
+
+            @Override
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                if (Email.getText().isEmpty()) {
+                    Email.setText("E-mail");
+                    Email.setForeground(new java.awt.Color(153, 153, 153)); // Volver al color gris si está vacío
+                }
+            }
+        });
+
+        Contrasena = new javax.swing.JPasswordField();
+        Contrasena.setForeground(new java.awt.Color(153, 153, 153));
+        Contrasena.setText("Contraseña");
+        Contrasena.setEchoChar((char) 0); // Mostrar texto normal inicialmente
+
+        Contrasena.addFocusListener(new java.awt.event.FocusListener() {
+            @Override
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                if (String.valueOf(Contrasena.getPassword()).equals("Contraseña")) {
+                    Contrasena.setText("");
+                    Contrasena.setEchoChar('●'); // Cambiar a asteriscos al escribir
+                    Contrasena.setForeground(new java.awt.Color(0, 0, 0)); // Cambiar a negro
+                }
+            }
+
+            @Override
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                if (String.valueOf(Contrasena.getPassword()).isEmpty()) {
+                    Contrasena.setEchoChar((char) 0); // Mostrar texto normal
+                    Contrasena.setText("Contraseña");
+                    Contrasena.setForeground(new java.awt.Color(153, 153, 153)); // Volver al color gris si está vacío
+                }
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -81,36 +202,36 @@ public class Registro extends javax.swing.JFrame {
                 .addContainerGap(74, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(Login)
+                        .addComponent(Registrar)
                         .addGap(122, 122, 122))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(Usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(BotonLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(Usuario1, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Usuario2, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Usuario3, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(BotonRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(PrimerApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Email, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Contrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(69, 69, 69))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addComponent(Login, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Registrar, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(Usuario1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(PrimerApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(Usuario2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Email, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-                .addComponent(Usuario3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Contrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(49, 49, 49)
-                .addComponent(BotonLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(BotonRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(78, 78, 78))
         );
 
@@ -134,7 +255,7 @@ public class Registro extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void UsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UsuarioActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_UsuarioActionPerformed
 
 
@@ -178,14 +299,15 @@ public class Registro extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BotonLogin;
-    private javax.swing.JLabel Login;
+    private javax.swing.JButton BotonRegistro;
+    private javax.swing.JLabel Registrar;
     private javax.swing.JTextField Usuario;
-    private javax.swing.JTextField Usuario1;
-    private javax.swing.JTextField Usuario2;
-    private javax.swing.JTextField Usuario3;
+    private javax.swing.JTextField PrimerApellido;
+    private javax.swing.JTextField Email;
+    private javax.swing.JPasswordField Contrasena;
     private javax.swing.JPanel bg;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
+
 }
