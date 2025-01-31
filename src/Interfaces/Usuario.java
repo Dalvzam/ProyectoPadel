@@ -602,10 +602,12 @@ public class Usuario extends javax.swing.JFrame {
         }//GEN-LAST:event_Turno_5ActionPerformed
 
         private void botonHacerReservaActionPerformed(java.awt.event.ActionEvent evt) {
-            String contenido = fechaFormateada + "," + WhichTurnoSeleccionado() + "," + WhichPistaSeleccionada()+","+Login.USER+",sin jugador,sin jugador,sin jugador";
+            String contenido = fechaFormateada + "," + WhichTurnoSeleccionado() + "," + WhichPistaSeleccionada() + ","
+                    + Login.USER + ",sin jugador,sin jugador,sin jugador,0"; 
             File archivo = new File("src/Datos/reservas.csv");
             File tempFile = new File("src/Datos/temp_reservas.csv");
             boolean actualizado = false;
+            boolean pistaBloqueada = false;
         
             try (BufferedReader br = new BufferedReader(new FileReader(archivo));
                  FileWriter escritor = new FileWriter(tempFile)) {
@@ -614,43 +616,68 @@ public class Usuario extends javax.swing.JFrame {
                 while ((linea = br.readLine()) != null) {
                     String[] datosLeidos = linea.split(",");
         
-                    if (!actualizado && datosLeidos.length == 7) {
+                    if (!actualizado && datosLeidos.length == 8) {
                         String fecha = datosLeidos[0];
                         String turno = datosLeidos[1];
                         String colorPista = datosLeidos[2];
+                        String bloqueoPista = datosLeidos[7];
         
-                        if (fecha.equals(fechaFormateada) && turno.equals(WhichTurnoSeleccionado()) && colorPista.equals(WhichPistaSeleccionada())) {
-                            // Revisamos las columnas de jugadores (índices 3 a 6)
-                            for (int i = 3; i <= 6; i++) {
-                                if (datosLeidos[i].equalsIgnoreCase("sin jugador") || datosLeidos[i].equalsIgnoreCase(Login.USER)) {
-                                    datosLeidos[i] = Login.USER; // Reemplaza la primera coincidencia
-                                    actualizado = true;
-                                    break; // Sale del bucle
+                        if (fecha.equals(fechaFormateada) && turno.equals(WhichTurnoSeleccionado()) 
+                                && colorPista.equals(WhichPistaSeleccionada())) {
+        
+                            if (bloqueoPista.equals("1")) {
+                                pistaBloqueada = true;
+                            } else {
+                                // Verificar si el usuario ya está en la lista
+                                boolean usuarioYaRegistrado = false;
+                                for (int i = 3; i <= 6; i++) {
+                                    if (datosLeidos[i].equalsIgnoreCase(Login.USER)) {
+                                        usuarioYaRegistrado = true;
+                                        break;
+                                    }
+                                }
+        
+                                if (!usuarioYaRegistrado) {
+                                    // Reemplazamos la primera coincidencia de "sin jugador"
+                                    for (int i = 3; i <= 6; i++) {
+                                        if (datosLeidos[i].equalsIgnoreCase("sin jugador")) {
+                                            datosLeidos[i] = Login.USER;
+                                            actualizado = true;
+                                            break;
+                                        }
+                                    }
                                 }
                             }
                         }
                     }
-                    
+        
                     escritor.write(String.join(",", datosLeidos) + System.lineSeparator());
                 }
-                // Si no se ha actualizado, agregar la nueva línea
+        
+                if (pistaBloqueada) {
+                    javax.swing.JOptionPane.showMessageDialog(null, 
+                            "La pista está bloqueada por el administrador",
+                            "Error", 
+                            javax.swing.JOptionPane.ERROR_MESSAGE);
+                    return; // Evita escribir si la pista está bloqueada
+                }
+        
+                // Si no se encontró la reserva, agregar la nueva línea
                 if (!actualizado) {
                     escritor.write(contenido + System.lineSeparator());
                 }
-                
+        
             } catch (IOException e) {
                 e.printStackTrace();
                 return;
             }
-
-            
-            // Reemplaza el archivo original con el actualizado
+        
+            // Reemplazar el archivo original
             if (archivo.delete() && tempFile.renameTo(archivo)) {
                 ActualizarPistas(WhichTurnoSeleccionado());
-            } 
-            
-            
+            }
         }
+        
 
     private void Pista_AzulMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Pista_AzulMouseClicked
         if (Seleccionado_Azul.isVisible()) {
@@ -712,24 +739,31 @@ public class Usuario extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_Pista_VerdeMouseClicked
 
-    private void botonCancelarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelarReservaActionPerformed
+    private void botonCancelarReservaActionPerformed(java.awt.event.ActionEvent evt) {
         File archivo = new File("src/Datos/reservas.csv");
-            File tempFile = new File("src/Datos/temp_reservas.csv");
-            boolean actualizado = false;
-        
-            try (BufferedReader br = new BufferedReader(new FileReader(archivo));
-                 FileWriter escritor = new FileWriter(tempFile)) {
-        
-                String linea;
-                while ((linea = br.readLine()) != null) {
-                    String[] datosLeidos = linea.split(",");
-        
-                    if (!actualizado && datosLeidos.length == 7) {
-                        String fecha = datosLeidos[0];
-                        String turno = datosLeidos[1];
-                        String colorPista = datosLeidos[2];
-        
-                        if (fecha.equals(fechaFormateada) && turno.equals(WhichTurnoSeleccionado()) && colorPista.equals(WhichPistaSeleccionada())) {
+        File tempFile = new File("src/Datos/temp_reservas.csv");
+        boolean actualizado = false;
+        boolean pistaBloqueada = false;
+    
+        try (BufferedReader br = new BufferedReader(new FileReader(archivo));
+             FileWriter escritor = new FileWriter(tempFile)) {
+    
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                String[] datosLeidos = linea.split(",");
+    
+                if (!actualizado && datosLeidos.length == 8) { // Asegura que tiene 8 columnas
+                    String fecha = datosLeidos[0];
+                    String turno = datosLeidos[1];
+                    String colorPista = datosLeidos[2];
+                    String bloqueoPista = datosLeidos[7]; 
+    
+                    if (fecha.equals(fechaFormateada) && turno.equals(WhichTurnoSeleccionado()) 
+                            && colorPista.equals(WhichPistaSeleccionada())) {
+    
+                        if (bloqueoPista.equals("1")) {
+                            pistaBloqueada = true;
+                        } else {
                             // Revisamos las columnas de jugadores (índices 3 a 6)
                             for (int i = 3; i <= 6; i++) {
                                 if (datosLeidos[i].equalsIgnoreCase(Login.USER)) {
@@ -740,22 +774,31 @@ public class Usuario extends javax.swing.JFrame {
                             }
                         }
                     }
-                    
-                    escritor.write(String.join(",", datosLeidos) + System.lineSeparator());
                 }
-                
-                
-            } catch (IOException e) {
-                e.printStackTrace();
+    
+                escritor.write(String.join(",", datosLeidos) + System.lineSeparator());
+            }
+    
+            // Mostrar mensaje si la pista está bloqueada y no permitir cancelar
+            if (pistaBloqueada) {
+                javax.swing.JOptionPane.showMessageDialog(null, 
+                        "No puedes cancelar la reserva porque la pista está bloqueada por el administrador.",
+                        "Error",
+                        javax.swing.JOptionPane.ERROR_MESSAGE);
                 return;
             }
-
-            
-            // Reemplaza el archivo original con el actualizado
-            if (archivo.delete() && tempFile.renameTo(archivo)) {
-                ActualizarPistas(WhichTurnoSeleccionado());
-            } 
-    }//GEN-LAST:event_botonCancelarReservaActionPerformed
+    
+        } catch (IOException e) {
+            e.printStackTrace();
+            return;
+        }
+    
+        // Reemplaza el archivo original con el actualizado
+        if (archivo.delete() && tempFile.renameTo(archivo)) {
+            ActualizarPistas(WhichTurnoSeleccionado());
+        }
+    }
+    
         
         public static void ActualizarPistas(String turnoSeleccionado){
             /* Cada vez que se seleccione un turno, las pistas se actualizarán y mostraran los jugadores */
@@ -779,7 +822,7 @@ public class Usuario extends javax.swing.JFrame {
 
                 while((linea = br.readLine()) != null){
                     String datosLeidos [] = linea.split(",");
-                    if (datosLeidos.length == 7){
+                    if (datosLeidos.length == 8){
                         fecha = datosLeidos[0];
                         turno = datosLeidos[1];
                         colorPista = datosLeidos[2];
