@@ -23,7 +23,6 @@ public class Login extends javax.swing.JFrame {
     /**
      * Creates new form Login
      */
-    public static String ID;
     public static String USER;
     public String ComprobarUsuario(File archivo,String usuario,String contrasenia){
         /* Esta funcion retornará tipo de usuario que se ha logeado:
@@ -44,16 +43,12 @@ public class Login extends javax.swing.JFrame {
             
             while((linea = br.readLine()) != null){
                 String datosLeidos [] = linea.split(",");
-                if (datosLeidos.length == 4){
-                    ID = datosLeidos[0];
-                    USER = datosLeidos[1];
-                    password = datosLeidos[2];
-                    tipoUser = datosLeidos[3];
+                if (datosLeidos.length == 3){
+                    USER = datosLeidos[0];
+                    password = datosLeidos[1];
+                    tipoUser = datosLeidos[2];
                     if (USER.equals(usuario) && password.equals(contrasenia)){
                         return tipoUser;
-                    }else{
-                        // Por si no ha encontrado en la ultima iteracion un usuario registrado no dejo ningun ID guardado
-                        ID = null;
                     }
                 }
             }   
@@ -143,6 +138,7 @@ public class Login extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
+        setLocationRelativeTo(null);
 
         bg.setBackground(new java.awt.Color(204, 204, 204));
         bg.setMinimumSize(new java.awt.Dimension(1366, 768));
