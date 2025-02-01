@@ -2,8 +2,17 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package Login;
+package Interfaces;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 /**
  *
  * @author Dalvzam
@@ -14,9 +23,101 @@ public class Login extends javax.swing.JFrame {
     /**
      * Creates new form Login
      */
-    public Login() {
-        initComponents();
+    public static String USER;
+    public String ComprobarUsuario(File archivo,String usuario,String contrasenia){
+        /* Esta funcion retornará tipo de usuario que se ha logeado:
+         * - 0 si no es un usuario registrado
+         * - 1 si es un usuario normal
+         * - 2 si es un usuario Administrador
+        */
+        FileReader fr = null;
+        BufferedReader br = null;
+        
+        String password;
+        String tipoUser;
+        try{
+            fr = new FileReader(archivo);
+            br = new BufferedReader(fr);
+            
+            String linea;
+            
+            while((linea = br.readLine()) != null){
+                String datosLeidos [] = linea.split(",");
+                if (datosLeidos.length == 3){
+                    USER = datosLeidos[0];
+                    password = datosLeidos[1];
+                    tipoUser = datosLeidos[2];
+                    if (USER.equals(usuario) && password.equals(contrasenia)){
+                        return tipoUser;
+                    }
+                }
+            }   
+        }catch(Exception e){
+            e.printStackTrace();
+        }finally{
+            try {
+                if (fr != null){
+                    fr.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        return "0";
     }
+    
+    public Login() {
+    initComponents();
+    
+    // Configuración del ActionListener para el botón Login
+    BotonLogin.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            // Obtener el texto ingresado en los campos de Usuario y Contraseña
+            String usuario = Usuario.getText();
+            String contraseña = Contraseña.getText();
+            
+            
+            File archivo = new File("src/Datos/usuarios.csv");
+            
+            if (ComprobarUsuario(archivo, usuario, contraseña).equals("1")) {
+                // Cerrar el frame actual
+                dispose();
+                
+                // Mostrar el otro frame del usuario registrado
+                Usuario JFrameUsuario = new Usuario(); 
+                JFrameUsuario.setVisible(true);
+            // En el caso de que el usuario y contraseña que se introduzca sea uno registrado como Administrador (tipo 2) mostrará el frame de administrador
+            } else if(ComprobarUsuario(archivo, usuario, contraseña).equals("2")){
+                // Cerrar el frame actual
+                dispose();
+                
+                // Mostrar el otro frame del Administrador
+                Admin JFrameAdmin = new Admin(); 
+                JFrameAdmin.setVisible(true);
+            }else {
+                // Mostrar mensaje de error si no coincide
+                javax.swing.JOptionPane.showMessageDialog(null, 
+                    "Usuario o contraseña incorrectos", 
+                    "Error", 
+                    javax.swing.JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    });
+    
+    Registrarse.addMouseListener(new MouseAdapter() {
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            // Cerrar el frame actual
+            dispose();
+
+            // Mostrar el otro frame de Registro
+            Registro JFrameRegistro = new Registro(); 
+            JFrameRegistro.setVisible(true);
+        }
+    });
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -36,12 +137,14 @@ public class Login extends javax.swing.JFrame {
         Registrarse = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
+        setLocationRelativeTo(null);
 
         bg.setBackground(new java.awt.Color(204, 204, 204));
         bg.setMinimumSize(new java.awt.Dimension(1366, 768));
         bg.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        Login.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 48)); // NOI18N
+        Login.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 48)); // NOI18N
         Login.setText("Login");
 
         Usuario.setForeground(new java.awt.Color(153, 153, 153));
@@ -50,6 +153,7 @@ public class Login extends javax.swing.JFrame {
         Contraseña.setForeground(new java.awt.Color(153, 153, 153));
         Contraseña.setText("Contraseña");
 
+        BotonLogin.setBackground(new java.awt.Color(255, 102, 0));
         BotonLogin.setText("Login");
 
         Registrarse.setText("Registrarse");
@@ -145,7 +249,7 @@ public class Login extends javax.swing.JFrame {
             }
         });
     }
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BotonLogin;
     private javax.swing.JTextField Contraseña;
