@@ -19,7 +19,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  * @author jaimegonher2
  */
 public class Login extends javax.swing.JFrame {
-
+    
     /**
      * Creates new form Login
      */
@@ -143,7 +143,7 @@ public class Login extends javax.swing.JFrame {
         bg.setBackground(new java.awt.Color(204, 204, 204));
         bg.setMinimumSize(new java.awt.Dimension(1366, 768));
         bg.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
+        
         Login.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 48)); // NOI18N
         Login.setText("Login");
 
