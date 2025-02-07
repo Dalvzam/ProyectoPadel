@@ -63,6 +63,7 @@ private static final String RUTA_CSV = "src/Datos/reservas.csv";
             File tempFile = new File("src/Datos/temp_reservas.csv");
             boolean actualizado = false;
             boolean pistaBloqueada = false;
+            boolean flag = false;
 
             try (BufferedReader br = new BufferedReader(new FileReader(archivo));
                  FileWriter escritor = new FileWriter(tempFile)) {
@@ -87,7 +88,11 @@ private static final String RUTA_CSV = "src/Datos/reservas.csv";
                     escritor.write(String.join(",", datosLeidos) + System.lineSeparator());
                 }
 
-
+                if (flag == false){
+                    // la fecha escogida no existe en el archivo y hay que guardarla
+                    String contenido = fechaFormateada + "," + WhichTurnoSeleccionado() + "," + WhichPistaSeleccionada() + "," + "sin jugador,sin jugador,sin jugador,sin jugador,1"; 
+                    escritor.write(contenido + System.lineSeparator());
+                }
                     javax.swing.JOptionPane.showMessageDialog(null,
                             "El estado de la pista ha cambiado correctamente.",
                             "Éxito",
@@ -176,10 +181,15 @@ private static final String RUTA_CSV = "src/Datos/reservas.csv";
         PanelLogo = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         botonCancelarReserva = new javax.swing.JButton();
-        seleccionarPista = new javax.swing.JComboBox<>();
         bloquear = new javax.swing.JButton();
         desbloquear = new javax.swing.JButton();
         seleccionarUsuario = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
         PanelPistas = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
@@ -218,7 +228,6 @@ private static final String RUTA_CSV = "src/Datos/reservas.csv";
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1366, 820));
         setResizable(false);
-        setLocationRelativeTo(null);
 
         bg.setMinimumSize(new java.awt.Dimension(1366, 820));
         bg.setPreferredSize(new java.awt.Dimension(1366, 820));
@@ -340,13 +349,6 @@ private static final String RUTA_CSV = "src/Datos/reservas.csv";
             }
         });
 
-        seleccionarPista.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PISTA", "Pista Azul", "Pista Morada", "Pista Roja", "Pista Verde", " " }));
-        seleccionarPista.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                seleccionarPistaActionPerformed(evt);
-            }
-        });
-
         bloquear.setText("Bloquear");
 
         desbloquear.setText("Desbloquear");
@@ -363,44 +365,80 @@ private static final String RUTA_CSV = "src/Datos/reservas.csv";
             }
         });
 
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("1. Seleccionar pista");
+
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("2. Seleccionar turno");
+
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("3. Seleccionar usuario");
+
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("4. Pulsar cancelar");
+
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("Para bloquear o desbloquear, seleccionar antes");
+
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("pista, día y turno.");
+
         javax.swing.GroupLayout PanelFechaTurnoLayout = new javax.swing.GroupLayout(PanelFechaTurno);
         PanelFechaTurno.setLayout(PanelFechaTurnoLayout);
         PanelFechaTurnoLayout.setHorizontalGroup(
             PanelFechaTurnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Calendario, javax.swing.GroupLayout.DEFAULT_SIZE, 540, Short.MAX_VALUE)
+            .addComponent(Calendario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(PanelTurnos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(PanelFechaTurnoLayout.createSequentialGroup()
                 .addComponent(PanelLogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(60, 60, 60)
+                .addGap(18, 18, 18)
                 .addGroup(PanelFechaTurnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PanelFechaTurnoLayout.createSequentialGroup()
+                        .addGroup(PanelFechaTurnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(seleccionarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(botonCancelarReserva))
+                        .addGap(53, 53, 53)
+                        .addGroup(PanelFechaTurnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel4)))
+                    .addComponent(jLabel5)
                     .addGroup(PanelFechaTurnoLayout.createSequentialGroup()
                         .addComponent(bloquear)
                         .addGap(18, 18, 18)
                         .addComponent(desbloquear))
-                    .addComponent(seleccionarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(seleccionarPista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(botonCancelarReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel7))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         PanelFechaTurnoLayout.setVerticalGroup(
             PanelFechaTurnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelFechaTurnoLayout.createSequentialGroup()
-                .addGroup(PanelFechaTurnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(PanelFechaTurnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(PanelFechaTurnoLayout.createSequentialGroup()
                         .addComponent(PanelLogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelFechaTurnoLayout.createSequentialGroup()
+                    .addGroup(PanelFechaTurnoLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(seleccionarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(botonCancelarReserva)
-                        .addGap(25, 25, 25)
-                        .addComponent(seleccionarPista, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(14, 14, 14)
+                        .addGroup(PanelFechaTurnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(seleccionarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
+                        .addGap(1, 1, 1)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(PanelFechaTurnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(botonCancelarReserva)
+                            .addComponent(jLabel3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(PanelFechaTurnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(bloquear)
-                            .addComponent(desbloquear))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(desbloquear))))
                 .addComponent(Calendario, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(PanelTurnos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -984,10 +1022,6 @@ private static final String RUTA_CSV = "src/Datos/reservas.csv";
         // TODO add your handling code here:
     }//GEN-LAST:event_desbloquearActionPerformed
 
-    private void seleccionarPistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_seleccionarPistaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_seleccionarPistaActionPerformed
-
     private void seleccionarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_seleccionarUsuarioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_seleccionarUsuarioActionPerformed
@@ -1207,7 +1241,13 @@ private static final String RUTA_CSV = "src/Datos/reservas.csv";
     private javax.swing.JButton bloquear;
     private javax.swing.JButton botonCancelarReserva;
     private javax.swing.JButton desbloquear;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -1230,7 +1270,6 @@ private static final String RUTA_CSV = "src/Datos/reservas.csv";
     public static javax.swing.JLabel jugador_Verde_2;
     public static javax.swing.JLabel jugador_Verde_3;
     public static javax.swing.JLabel jugador_Verde_4;
-    private javax.swing.JComboBox<String> seleccionarPista;
     private javax.swing.JComboBox<String> seleccionarUsuario;
     private javax.swing.JLabel textoTurnos;
     // End of variables declaration//GEN-END:variables
